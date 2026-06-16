@@ -17,7 +17,11 @@
 - [Lichess Puzzles (free, no ads)](https://lichess.org/training)
   3M+ real-game tactics with instant right/wrong feedback and a rating that tracks you.
   Filterable by theme (forks, pins, hanging pieces). Use for: daily tactics reps — the
-  tightest feedback loop available. The single best free practice tool.
+  tightest feedback loop available. The single best free practice tool. NOTE: user already
+  knows the motifs (LR-0002), so use this for timed *speed* reps, not learning what a fork is.
+- [Lichess Practice — Checkmates (free)](https://lichess.org/practice)
+  Guided, interactive drills for the basic mates (K+Q, K+R, two rooks) against the computer.
+  Use for: drilling conversion technique until it's automatic. Supports Lesson 2.
 
 ## Wisdom (Communities)
 

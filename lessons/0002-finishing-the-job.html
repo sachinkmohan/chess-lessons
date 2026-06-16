@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lesson 1 — The 3-Second Scan</title>
+<title>Lesson 2 — Finishing the Job</title>
 <style>
   :root {
     --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f;
@@ -24,6 +24,7 @@
   .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
   .scanbox strong { color: var(--accent); }
   a { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
 
   .puzzle { margin: 1.5rem 0 2rem; }
   .prompt { font-weight: bold; margin-bottom: .1rem; }
@@ -50,54 +51,68 @@
 </style>
 </head>
 <body>
-  <p class="kicker">Lesson 1 &middot; Board awareness</p>
-  <h1>The 3-Second Scan</h1>
-  <p class="sub">Stop hanging pieces. Start taking free ones. One habit fixes both.</p>
+  <p class="kicker">Lesson 2 &middot; Converting won games</p>
+  <h1>Finishing the Job</h1>
+  <p class="sub">You won the material. Now turn it into a checkmate &mdash; without stalemating.</p>
 
-  <p>You told me your games slip away to three things: you hang pieces, you miss free
-  material, and you run out of time. The first two are the <em>same</em> problem seen
-  from two sides &mdash; nobody looked at the board through the opponent's eyes before
-  moving. The fix is a tiny ritual you run <strong>every move</strong>.</p>
+  <p>Winning a piece is half the game. Plenty of players at your level go up a queen and
+  still draw or lose &mdash; the clock runs out, or they accidentally <em>stalemate</em> the
+  enemy king. This lesson gives you two reliable mates and the one trap that ruins them.</p>
 
   <div class="scanbox">
-    <p style="margin:.2rem 0;"><strong>The scan.</strong> Before you move, ask two questions:</p>
-    <p style="margin:.2rem 0;">1. Is anything of <strong>mine</strong> attacked and undefended? &rarr; save it.</p>
-    <p style="margin:.2rem 0;">2. Did my opponent leave anything <strong>undefended</strong>? &rarr; take it.</p>
+    <p style="margin:.2rem 0;"><strong>The golden rule of checkmating a lone king:</strong>
+    drive it to the <strong>edge</strong> of the board. A king in the center can't be mated;
+    a king on the rim has nowhere to run.</p>
   </div>
 
-  <p>This is the <em>Captures</em> half of the classic <strong>Checks &middot; Captures &middot;
-  Threats</strong> routine &mdash; the part that pays off fastest at your level. Full version
-  is on the <a href="../reference/cct-blunder-check.html">CCT reference card</a>.</p>
+  <h2>Mate #1 — Two Rooks (the "ladder")</h2>
+  <p>The easiest mate in chess, and nearly stalemate-proof. One rook pins the king to a rank;
+  the other rook checks along the next rank. Then you "climb the ladder": each time the king
+  steps toward a rook, that rook slides to the far side and keeps climbing &mdash; pushing the
+  king to the edge, where the next check is mate.</p>
+
+  <h2>Mate #2 — King + Queen</h2>
+  <p>Powerful but dangerous. The queen herds the lone king to the edge; then you bring
+  <strong>your own king</strong> up to support a mating check. The queen alone can never
+  mate &mdash; she needs the king's help.</p>
+
+  <div class="warn">
+    <strong>The stalemate trap.</strong> If the enemy king is <em>not in check</em> but has
+    <em>no legal move</em>, the game is an instant draw. With a queen this is shockingly easy
+    to do by accident. Rule of thumb: keep the queen a <em>knight's-move</em> away from the
+    lone king while herding, and always leave it one escape square until your king arrives to mate.
+  </div>
 
   <hr>
   <h2>Now you try</h2>
-  <p>Three positions. Read the prompt, run the scan, then <strong>click the square</strong>
-  of the right piece. You'll know instantly if you got it.</p>
+  <p>Read the prompt, then <strong>click the square</strong> to move the named piece. Instant feedback.</p>
 
   <div id="puzzles"></div>
 
   <hr>
   <div class="scanbox">
-    <p style="margin:.2rem 0;"><strong>Your tangible win this session:</strong> the two-question
-    scan. Do it on literally every move in your next blitz game &mdash; even when it's "obvious".
-    Slow now, automatic later.</p>
+    <p style="margin:.2rem 0;"><strong>Your tangible win this session:</strong> two mates you can
+    trust, and a permanent allergy to the stalemate square. Next time you're up big, drive the
+    king to the edge &mdash; and before any queen move, ask "does this leave him a legal move?"</p>
   </div>
 
   <h2>Go deeper</h2>
-  <p><strong>Primary source (watch ~10 min):</strong> GM Aman Hambleton,
+  <p><strong>Best practice tool:</strong> <a href="https://lichess.org/practice">Lichess Practice &mdash; Checkmates</a>
+  walks you through K+Q, K+R, and two-rook mates against the computer until they're automatic. Free, ~5 min each.</p>
+  <p><strong>Primary source:</strong> GM Aman Hambleton's
   <a href="https://www.youtube.com/playlist?list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm">Building Habits</a>
-  &mdash; a grandmaster climbing from a low rating using exactly these habits. Watch <em>how
-  he scans</em> before each move.</p>
-  <p><strong>Practice the loop:</strong> 5 minutes of <a href="https://lichess.org/training/hangingPiece">Lichess "Hanging Piece" puzzles</a> &mdash; same skill, instant feedback, free.</p>
+  shows clean conversions in real games &mdash; watch how he simplifies into a basic mate once ahead.</p>
+  <p>See also the <a href="../reference/cct-blunder-check.html">CCT reference card</a> and
+  <a href="0001-the-three-second-scan.html">Lesson 1: The 3-Second Scan</a>.</p>
 
   <div class="ask" style="margin-top:1.4rem;">
-    <strong>I'm your teacher &mdash; ask me anything.</strong> Stuck on why a piece is or isn't
-    defended? Want me to review a game you lost? Just say so and we'll dig in.
+    <strong>I'm your teacher &mdash; ask me anything.</strong> Want the step-by-step for a
+    specific mate, or unsure why a move is stalemate vs. checkmate? Just ask.
   </div>
 
   <footer>
     <p style="margin:0 0 .6rem;"><a href="../index.html">&larr; Home</a></p>
-    Next up: the <em>Threats</em> half of the scan (forks &amp; pins), or a review of one of your
+    Next up: applying the scan in slower games to make it automatic, or a review of one of your
     real games. Your call.
   </footer>
 
@@ -107,31 +122,31 @@
 
   const puzzles = [
     {
-      prompt: "Click the Black piece you can win for free.",
+      prompt: "Two-rook ladder. Move the rook on h1 to deliver checkmate.",
       turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, d1:{t:'R',c:'w'}, e4:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, d7:{t:'N',c:'b'} },
-      answer: 'd7',
-      good: "Yes. Your rook on d1 sees all the way up the open d-file. The knight is undefended — Rxd7 wins it.",
-      bad:  "Not quite. Look down open files and diagonals: which Black piece does one of your pieces already attack, with nothing defending it?"
+      pieces: { a1:{t:'K',c:'w'}, h1:{t:'R',c:'w'}, a7:{t:'R',c:'w'},
+                e8:{t:'K',c:'b'} },
+      answer: 'h8',
+      good: "Mate. Rh8# checks along the back rank; the rook on a7 seals rank 7, so the king has nowhere to go. Two rooks need no king help.",
+      bad:  "The king is stuck on rank 8 (your a7-rook covers rank 7). Put the h1-rook where it checks along the king's own rank."
     },
     {
-      prompt: "One of YOUR pieces is hanging. Click the piece you must save.",
-      turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, b5:{t:'B',c:'w'}, a2:{t:'P',c:'w'}, b2:{t:'P',c:'w'}, c2:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, a6:{t:'P',c:'b'}, b7:{t:'P',c:'b'} },
-      answer: 'b5',
-      good: "Right. The pawn on a6 attacks your bishop, and nothing defends it. Move it now — if you don't, it's gone.",
-      bad:  "Look again from Black's side: which of your pieces is a Black pawn attacking, with no friendly piece defending it?"
+      prompt: "King + Queen. Move the queen on b1 to deliver checkmate.",
+      turn: "You are White, to move. Your king is on c6.",
+      pieces: { c6:{t:'K',c:'w'}, b1:{t:'Q',c:'w'},
+                a8:{t:'K',c:'b'} },
+      answer: 'b7',
+      good: "Mate. Qb7# is protected by your king on c6, so Black can't capture — and a7 and b8 are both covered. King support is the whole trick.",
+      bad:  "The queen alone can't mate — she needs your king. Find the square right next to the Black king that YOUR king already defends."
     },
     {
-      prompt: "Run the full scan, then click the Black piece you can win for free.",
-      turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, d1:{t:'Q',c:'w'}, f2:{t:'P',c:'w'}, g2:{t:'P',c:'w'}, h2:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, d8:{t:'Q',c:'b'}, h3:{t:'B',c:'b'} },
-      answer: 'h3',
-      good: "Clean. The bishop wandered to h3 — your g2 pawn attacks it and nothing defends it. gxh3 wins a bishop.",
-      bad:  "The queens are a distraction. Check your pawns: does one of them attack an undefended Black piece on the edge?"
+      prompt: "Same position. Click the square where moving the queen would be STALEMATE — the move to NEVER play.",
+      turn: "You are White, to move. Your king is on c6.",
+      pieces: { c6:{t:'K',c:'w'}, b1:{t:'Q',c:'w'},
+                a8:{t:'K',c:'b'} },
+      answer: 'b6',
+      good: "Exactly — that's the trap. Qb6 gives no check but takes away a7, b7 and b8. Black has no legal move: instant draw. One square short of mate throws the whole game.",
+      bad:  "Look for the square that leaves the Black king with zero legal moves AND no check. It's painfully close to the mating square."
     }
   ];
 
