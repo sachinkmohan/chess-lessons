@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chess Training</title>
+<style>
+  :root {
+    --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f;
+    --card:#fffdf7; --light:#efe6d2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    color: var(--ink); background: var(--bg); line-height: 1.55;
+    max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem;
+  }
+  header { margin-bottom: 1.5rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: clamp(1.6rem, 6vw, 2.1rem); margin: .15rem 0 .35rem; letter-spacing: -0.01em; }
+  .tagline { color: var(--soft); font-style: italic; margin: 0; }
+
+  .mission {
+    border: 1px solid var(--rule); background: var(--card); border-radius: 10px;
+    padding: 1rem 1.25rem; margin: 1.5rem 0 2rem;
+  }
+  .mission h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); margin: 0 0 .4rem; }
+  .mission p { margin: .3rem 0; }
+  .mission .meta { color: var(--soft); font-size: .9rem; margin-top: .6rem; }
+
+  h2.section { font-size: 1.25rem; margin: 2.2rem 0 .8rem; padding-bottom: .3rem; border-bottom: 1px solid var(--rule); }
+
+  .grid { display: grid; grid-template-columns: 1fr; gap: .9rem; }
+  @media (min-width: 34rem) { .grid { grid-template-columns: 1fr 1fr; } }
+
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    border: 1px solid var(--rule); background: var(--card); border-radius: 10px;
+    padding: 1rem 1.15rem; transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .card:hover, .card:focus {
+    transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    border-color: var(--accent); outline: none;
+  }
+  .card .num { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .card .title { font-size: 1.12rem; margin: .15rem 0 .35rem; font-weight: bold; }
+  .card .desc { color: var(--soft); font-size: .92rem; margin: 0; }
+  .card .tag { display: inline-block; margin-top: .6rem; font-size: .75rem; color: var(--accent); }
+
+  ul.links { list-style: none; padding: 0; margin: .5rem 0; }
+  ul.links li { padding: .55rem 0; border-bottom: 1px solid var(--rule); }
+  ul.links li:last-child { border-bottom: 0; }
+  ul.links a { color: var(--accent); text-decoration: none; font-weight: bold; }
+  ul.links a:hover { text-decoration: underline; }
+  ul.links .note { color: var(--soft); font-size: .9rem; display: block; font-weight: normal; }
+
+  footer { color: var(--soft); font-size: .85rem; margin-top: 3rem; text-align: center; }
+</style>
+</head>
+<body>
+  <header>
+    <p class="kicker">Training Workspace</p>
+    <h1>Chess &mdash; Climbing Past 300</h1>
+    <p class="tagline">Fewer blunders, more free pieces, a steadier clock.</p>
+  </header>
+
+  <section class="mission">
+    <h2>The Mission</h2>
+    <p>Climb out of the ~300 rating basement in 3+2 blitz on chess.com by fixing the
+    real problem &mdash; one-move mistakes &mdash; not by piling on new openings.</p>
+    <p class="meta">Known: Scandinavian (Black), London (White). Sessions: 5&ndash;10 min. Openings parked until ~1000.</p>
+  </section>
+
+  <h2 class="section">Lessons</h2>
+  <div class="grid">
+    <a class="card" href="lessons/0001-the-three-second-scan.html">
+      <span class="num">Lesson 1</span>
+      <p class="title">The 3-Second Scan</p>
+      <p class="desc">Stop hanging pieces and start taking free ones with a two-question
+      check you run every move. Three interactive positions with instant feedback.</p>
+      <span class="tag">Interactive &middot; ~8 min &rarr;</span>
+    </a>
+  </div>
+
+  <h2 class="section">Reference Cards</h2>
+  <div class="grid">
+    <a class="card" href="reference/cct-blunder-check.html">
+      <span class="num">Reference</span>
+      <p class="title">The CCT Blunder-Check</p>
+      <p class="desc">Checks &middot; Captures &middot; Threats &mdash; the full 5-second scan,
+      plus the beginner shortcut. Printable quick-reference.</p>
+      <span class="tag">Print &amp; keep &rarr;</span>
+    </a>
+  </div>
+
+  <h2 class="section">Practice &amp; Community</h2>
+  <ul class="links">
+    <li>
+      <a href="https://www.youtube.com/playlist?list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm">Building Habits &mdash; GM Aman Hambleton</a>
+      <span class="note">Primary source: a GM climbing with these exact habits. Watch how he scans.</span>
+    </li>
+    <li>
+      <a href="https://lichess.org/training/hangingPiece">Lichess &mdash; Hanging Piece puzzles</a>
+      <span class="note">5 min of reps, instant feedback, free. The tightest practice loop.</span>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/r/chessbeginners/">r/chessbeginners</a>
+      <span class="note">Post a lost game and ask "where did I go wrong" without being talked down to.</span>
+    </li>
+  </ul>
+
+  <footer>
+    Your teacher is one message away &mdash; share a lost game and we'll build a lesson around it.
+  </footer>
+</body>
+</html>

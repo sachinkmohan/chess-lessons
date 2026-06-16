@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference: The CCT Blunder-Check</title>
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    color: var(--ink); background: var(--bg); line-height: 1.5;
+    max-width: 40rem; margin: 3rem auto; padding: 0 1.25rem;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .15rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.5rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+  .step { margin: 1.1rem 0; }
+  .step h2 { font-size: 1.15rem; margin: 0 0 .2rem; }
+  .step h2 .letter { color: var(--accent); font-weight: bold; }
+  .step p { margin: .2rem 0; }
+  .ask { color: var(--soft); font-style: italic; }
+  .card {
+    border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.25rem;
+    background: #fffdf7; margin: 1.5rem 0;
+  }
+  .card strong { color: var(--accent); }
+  ol { padding-left: 1.2rem; }
+  footer { color: var(--soft); font-size: .85rem; margin-top: 2rem; }
+  a { color: var(--accent); }
+  @media print { body { margin: 0; } }
+</style>
+</head>
+<body>
+  <h1>The CCT Blunder-Check</h1>
+  <p class="sub">Checks &middot; Captures &middot; Threats — the 5-second scan before every move.</p>
+
+  <p>Before you touch a piece, look at the board <em>through your opponent's eyes</em>.
+  Most low-rated games are decided not by clever plans but by one player handing the
+  other a free piece. This routine catches that — both ways.</p>
+
+  <hr>
+
+  <div class="step">
+    <h2><span class="letter">C</span>hecks</h2>
+    <p>Can either side give check next move? Checks are the most forcing move in chess.</p>
+    <p class="ask">Ask: "Is my king about to be checked? Can I check theirs?"</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="letter">C</span>aptures</h2>
+    <p>What can be captured right now — by them, and by you?</p>
+    <p class="ask">Ask: "After my move, is any of MY pieces attacked and undefended?
+    Did THEY leave anything I can just take?"</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="letter">T</span>hreats</h2>
+    <p>Quieter moves that set up a capture or check next turn (a fork, a pin, a mate threat).</p>
+    <p class="ask">Ask: "What does my opponent want to do next, and does my move allow it?"</p>
+  </div>
+
+  <hr>
+
+  <div class="card">
+    <p><strong>Beginner shortcut.</strong> At ~300, master the <strong>Captures</strong>
+    line first — it alone fixes hanging pieces <em>and</em> missing free material:</p>
+    <ol>
+      <li>Is anything of <strong>mine</strong> attacked and undefended? &rarr; protect or move it.</li>
+      <li>Did my opponent leave anything <strong>undefended</strong>? &rarr; take it.</li>
+    </ol>
+    <p>Do this <em>every single move</em>. It feels slow at first; within a few hundred
+    games it becomes automatic — and faster than the vague worrying it replaces.</p>
+  </div>
+
+  <footer>
+    Reference card. See the lesson: <a href="../lessons/0001-the-three-second-scan.html">The 3-Second Scan</a>.
+    Source: <a href="https://chessdock.com/learn/how-to-stop-blundering-in-chess">ChessDock — How to Stop Blundering</a>.
+  </footer>
+</body>
+</html>
