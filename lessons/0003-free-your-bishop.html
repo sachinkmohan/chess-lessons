@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 — Free Your Bishop</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.9em; }
+  .myth { display:grid; grid-template-columns: 1fr 1fr; gap:.8rem; margin:1.2rem 0; }
+  @media (max-width: 30rem){ .myth { grid-template-columns:1fr; } }
+  .myth div { border:1px solid var(--rule); border-radius:8px; padding:.7rem .9rem; }
+  .myth .x { border-left:3px solid var(--bad); } .myth .o { border-left:3px solid var(--good); }
+  .myth h3 { margin:.1rem 0 .3rem; font-size:.95rem; }
+  ol.plan { margin:.6rem 0; padding-left:1.2rem; } ol.plan li { margin:.35rem 0; }
+  figure.fig { margin:1.2rem 0; } figure.fig figcaption { font-size:.86rem; color:var(--soft); margin-top:.4rem; max-width:24rem; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; }
+</style>
+</head>
+<body>
+  <p class="kicker">Lesson 3 &middot; Playing d5 as Black</p>
+  <h1>Free Your Bishop</h1>
+  <p class="sub">Built from your own games: why you lose with Black, and the one move-order rule that fixes it.</p>
+
+  <p>You won or drew every game as <strong>White</strong> and lost every game as <strong>Black</strong>.
+  All four Black losses had the <em>same</em> root cause — and it isn't tactics or time. It's a single move
+  played too early: <strong>&hellip;e6</strong>.</p>
+
+  <h2>The myth that's costing you the games</h2>
+  <p>You told me the plan as Black is to "build the fort: f7&ndash;e6&ndash;d5&ndash;c6&ndash;b7." Two problems.</p>
+
+  <div class="myth">
+    <div class="x">
+      <h3>&#10007; That isn't the Scandinavian</h3>
+      <p style="margin:.2rem 0;font-size:.92rem;">The real Scandinavian is <code>1.e4 d5 2.exd5 Qxd5</code> —
+      you <em>trade</em> the d-pawn and develop fast. No fort. And opponents rarely play <code>2.exd5</code>
+      anyway, so you're seldom even in it.</p>
+    </div>
+    <div class="o">
+      <h3>&#10003; The fort jails your own bishop</h3>
+      <p style="margin:.2rem 0;font-size:.92rem;">Playing <code>&hellip;e6</code> blocks the diagonal your
+      light-squared bishop (on c8) needs. It's stuck behind its own pawns all game — your worst piece.</p>
+    </div>
+  </div>
+
+  <figure class="fig">
+    <div id="trap"></div>
+    <figcaption>After <code>&hellip;e6</code> too early: the bishop on <span class="cb-chip red">c8</span>
+    is sealed in. Its only road (c8&ndash;d7&ndash;<span class="cb-chip red">e6</span>&ndash;f5) is blocked
+    by your own pawn. Trapped all game.</figcaption>
+  </figure>
+
+  <div class="scanbox">
+    <p style="margin:.2rem 0;"><strong>The one rule to remember:</strong> Never play <strong>&hellip;e6</strong>
+    until your light-squared bishop is already <strong>outside</strong> the pawn chain — developed to
+    <strong>f5</strong> or <strong>g4</strong> first. Bishop out, <em>then</em> e6.</p>
+  </div>
+
+  <h2>Your 3-move survival plan as Black</h2>
+  <ol class="plan">
+    <li><strong>Resolve the centre.</strong> If White offers <code>exd5</code>, recapture. If he pushes
+    <code>e5</code> or ignores it, leave d5 and develop.</li>
+    <li><strong>Bishop out before e6, knights before the queen.</strong> Get the c8-bishop to
+    <code>f5</code>/<code>g4</code>, play <code>&hellip;Nf6</code> + <code>&hellip;Nc6</code>. No early queen raids.</li>
+    <li><strong>Castle.</strong> Bishop free + knight on f6 → castle kingside, connect the rooks.</li>
+  </ol>
+
+  <hr>
+  <h2>Now you try</h2>
+  <p>Click the square you'd move to. <span style="color:var(--good)"><b>Green</b></span> = right move,
+  <span style="color:var(--bad)"><b>red</b></span> = the trap. Stuck? Hit <em>Show me the answer</em>.</p>
+
+  <div id="puzzles"></div>
+
+  <hr>
+  <div class="scanbox">
+    <p style="margin:.2rem 0;"><strong>Your tangible win this session:</strong> a reflex — before you ever
+    play <code>&hellip;e6</code> as Black, your bishop must already be on f5 or g4. That one habit removes
+    the cause of all four losses we reviewed.</p>
+  </div>
+
+  <h2>Go deeper</h2>
+  <p><strong>Primary source:</strong> GM Aman Hambleton's
+  <a href="https://www.youtube.com/playlist?list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm">Building Habits</a> —
+  notice he develops bishops to active squares and castles <em>before</em> anything fancy.</p>
+  <p><strong>Quick reference:</strong> the <a href="../reference/black-vs-e4-survival.html">Black vs 1.e4 survival card</a>.
+  See also <a href="0001-the-three-second-scan.html">Lesson 1</a> and
+  <a href="0004-the-greedy-queen.html">Lesson 4: The Greedy Queen</a>.</p>
+
+  <div class="ask" style="margin-top:1.4rem;">
+    <strong>I'm your teacher — ask me anything.</strong> Want a move-by-move walk through one of those four
+    games, or what to do specifically when White plays <code>2.e5</code>? Just ask.
+  </div>
+
+  <footer>
+    <p style="margin:0 0 .6rem;"><a href="../index.html">&larr; Home</a></p>
+    Remember: Rapid to improve, blitz for fun, no more bullet.
+  </footer>
+
+<script src="../assets/chessboard.js"></script>
+<script>
+  // Diagram: bishop jailed after an early ...e6
+  CB.render(document.getElementById('trap'), {
+    pieces: CB.fromFEN('rnbqkbnr/ppp2ppp/4p3/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R'),
+    highlights: { c8:'red', e6:'red' }
+  });
+
+  const puzzles = [
+    {
+      prompt: "White played 2.Nf3 — he won't take your pawn. Before you ever play …e6, FREE your light-squared bishop on c8 (shaded). Find the best move.",
+      turn: "You are Black, to move.",
+      pieces: CB.fromFEN('rnbqkbnr/ppp1pppp/8/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R'),
+      highlights: { c8:'mark' },
+      best: ['f5','g4'], bestFrom: 'c8', trap: { from:'e7', to:'e6' },
+      good: "Yes — …Bf5 (or …Bg4) develops the bishop OUTSIDE the pawn chain. Now it's active, and you can safely play …e6 next.",
+      trapMsg: "That's the trap. …e6 here slams the door on the c8-bishop before it escapes. This one early move lost all four games we reviewed.",
+      bad: "Not the move. Get the c8-bishop out in FRONT of your pawns (f5 or g4) before anything else.",
+      reveal: "Green = …Bf5, the bishop escapes. Red = …e6, the trap that jails it."
+    },
+    {
+      prompt: "Different game: your light bishop is already safe on f5 (shaded), knight on f6. Find Black's best move.",
+      turn: "You are Black, to move.",
+      pieces: CB.fromFEN('rn1qkb1r/pp2pppp/2p2n2/3p4/3P4/2N2N2/PPP2PPP/R1BQKB1R'),
+      highlights: { f5:'mark' },
+      best: ['e6'], bestFrom: 'e7', trap: { from:'f5', to:'c8' },
+      good: "Correct — NOW …e6 is right. The bishop is already outside the chain, so e6 opens the f8-bishop and supports the centre. Same move, opposite verdict — timing is everything.",
+      trapMsg: "Never un-develop a good piece. Retreating the bishop to c8 throws away two moves and the whole point of getting it out.",
+      bad: "Not the best. The bishop is already free, so the move that was a trap last time is now exactly right.",
+      reveal: "Green = …e6, now perfectly safe. Red = …Bc8, undeveloping your best piece."
+    },
+    {
+      prompt: "Bishop free on f5, knight on f6 — finish the survival plan. Find Black's best move.",
+      turn: "You are Black, to move.",
+      pieces: CB.fromFEN('rn1qk2r/pp2bppp/2p1pn2/3p1b2/3P4/5N2/PPP1B1PP/5RK1'),
+      highlights: { e8:'mark' },
+      best: ['g8'], bestFrom: 'e8', trap: { from:'h7', to:'h6' },
+      good: "Castled! King tucked to g8, rook joins on f8. Bishop free, knights out, king safe — opening done right.",
+      trapMsg: "A slow pawn move that does nothing while your king sits in the centre. Castle FIRST — loose kings are the other half of every Black loss.",
+      bad: "Not it. Development is done; the urgent job is king safety. Move the king toward the h-rook.",
+      reveal: "Green = O-O (king to g8). Red = …h6, a slow move that leaves the king exposed."
+    }
+  ];
+  const root = document.getElementById('puzzles');
+  puzzles.forEach((pz, i) => { pz.num = i + 1; CB.puzzle(root, pz); });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+/* Shared chessboard styling for all lessons + reference cards.
+   Used by assets/chessboard.js. Palette matches the workspace (Tufte-ish, warm paper). */
+
+.cb-board {
+  position: relative;
+  display: grid; grid-template-columns: repeat(8, 1fr);
+  width: min(22rem, 86vw); aspect-ratio: 1 / 1;
+  border: 2px solid #1a1a1a; user-select: none;
+}
+.cb-board.cb-sm { width: min(11rem, 70vw); border-width: 1.5px; }
+
+.cb-sq { position: relative; display: flex; align-items: center; justify-content: center; }
+.cb-light { background: #efe6d2; }
+.cb-dark  { background: #b58863; }
+
+/* translucent square highlight (for squares being discussed) */
+.cb-hl { position: absolute; inset: 0; z-index: 0; }
+
+.cb-piece { position: relative; z-index: 1; font-size: clamp(1.3rem, 6.5vw, 2rem); line-height: 1; }
+.cb-board.cb-sm .cb-piece { font-size: clamp(.75rem, 3.4vw, 1.05rem); }
+.cb-w { color: #fffdf9; text-shadow: 0 0 1px #000, 0 0 1px #000, 0 1px 2px rgba(0,0,0,.4); }
+.cb-b { color: #1a1a1a; text-shadow: 0 0 1px rgba(255,255,255,.4); }
+
+/* a–h / 1–8 coordinates */
+.cb-coord { position: absolute; z-index: 1; font-weight: bold; line-height: 1; opacity: .85;
+  font-family: Georgia, serif; font-size: clamp(.5rem, 1.7vw, .68rem); pointer-events: none; }
+.cb-board.cb-sm .cb-coord { font-size: clamp(.4rem, 1.4vw, .55rem); }
+.cb-rank { left: 2px; top: 1px; }
+.cb-file { right: 2px; bottom: 1px; }
+.cb-light .cb-coord { color: #b58863; }
+.cb-dark  .cb-coord { color: #efe6d2; }
+
+.cb-arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+
+/* interactive puzzle UI */
+.cb-sq.cb-pickable { cursor: pointer; }
+.cb-sq.cb-miss { outline: 4px solid #b23b3b; outline-offset: -4px; }
+.cb-sq.cb-hit { outline: 4px solid #2f7d32; outline-offset: -4px; }
+.cb-sq.cb-hit-red { outline: 4px solid #b23b3b; outline-offset: -4px; }
+.cb-puzzle { margin: 1.5rem 0 2rem; }
+.cb-prompt { font-weight: bold; margin: 0 0 .1rem; }
+.cb-turn { color: #6b6b6b; font-size: .9rem; margin: 0 0 .6rem; }
+.cb-controls { margin: .5rem 0 0; }
+.cb-btn { font: inherit; font-size: .85rem; cursor: pointer; background: #fff;
+  border: 1px solid #d9d2c5; border-radius: 6px; padding: .3rem .75rem; color: #7a1f1f; }
+.cb-btn:hover { border-color: #7a1f1f; }
+.cb-feedback { min-height: 1.4rem; margin: .55rem 0 0; font-size: .95rem; }
+.cb-feedback.good { color: #2f7d32; }
+.cb-feedback.bad  { color: #b23b3b; }
+.cb-feedback.neutral { color: #1a1a1a; }
+
+/* inline square/move chip you can use in prose, colour-matched to a highlight */
+.cb-chip { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; font-weight: bold;
+  padding: 0 .28em; border-radius: 4px; background: rgba(224,162,58,.32); }
+.cb-chip.green { background: rgba(47,125,50,.22); }
+.cb-chip.red   { background: rgba(178,59,59,.20); }
+
+@media print {
+  .cb-light, .cb-dark, .cb-hl, .cb-piece, .cb-coord {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+}

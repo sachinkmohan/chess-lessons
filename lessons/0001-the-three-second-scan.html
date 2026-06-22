@@ -4,49 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lesson 1 — The 3-Second Scan</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
 <style>
-  :root {
-    --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f;
-    --light:#efe6d2; --dark:#b58863; --good:#2f7d32; --bad:#b23b3b;
-  }
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
   * { box-sizing: border-box; }
-  body {
-    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
-    color: var(--ink); background: var(--bg); line-height: 1.55;
-    max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem;
-  }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
   .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
   h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
   .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
   h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
   hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
   p { margin: .6rem 0; }
+  a { color: var(--accent); }
   .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
   .scanbox strong { color: var(--accent); }
-  a { color: var(--accent); }
-
-  .puzzle { margin: 1.5rem 0 2rem; }
-  .prompt { font-weight: bold; margin-bottom: .1rem; }
-  .turn { color: var(--soft); font-size: .9rem; margin: 0 0 .6rem; }
-  .board {
-    display: grid; grid-template-columns: repeat(8, 1fr);
-    width: min(22rem, 86vw); aspect-ratio: 1 / 1;
-    border: 2px solid var(--ink); user-select: none;
-  }
-  .sq { display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
-  .sq.light { background: var(--light); }
-  .sq.dark  { background: var(--dark); }
-  .piece { font-size: clamp(1.3rem, 6.5vw, 2rem); line-height: 1; }
-  .piece.w { color: #fffdf9; text-shadow: 0 0 1px #000, 0 0 1px #000, 0 1px 2px rgba(0,0,0,.4); }
-  .piece.b { color: #1a1a1a; text-shadow: 0 0 1px rgba(255,255,255,.4); }
-  .sq.hit  { outline: 4px solid var(--good); outline-offset: -4px; }
-  .sq.miss { outline: 4px solid var(--bad);  outline-offset: -4px; }
-  .feedback { min-height: 1.4rem; margin: .55rem 0 0; font-size: .95rem; }
-  .feedback.good { color: var(--good); }
-  .feedback.bad  { color: var(--bad); }
-
-  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; }
   .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; }
 </style>
 </head>
 <body>
@@ -72,14 +46,14 @@
   <hr>
   <h2>Now you try</h2>
   <p>Three positions. Read the prompt, run the scan, then <strong>click the square</strong>
-  of the right piece. You'll know instantly if you got it.</p>
+  of the right piece. Green outline = correct, red = try again. Stuck? Hit <em>Show me the answer</em>.</p>
 
   <div id="puzzles"></div>
 
   <hr>
   <div class="scanbox">
     <p style="margin:.2rem 0;"><strong>Your tangible win this session:</strong> the two-question
-    scan. Do it on literally every move in your next blitz game &mdash; even when it's "obvious".
+    scan. Do it on literally every move in your next Rapid game &mdash; even when it's "obvious".
     Slow now, automatic later.</p>
   </div>
 
@@ -97,101 +71,43 @@
 
   <footer>
     <p style="margin:0 0 .6rem;"><a href="../index.html">&larr; Home</a></p>
-    Next up: the <em>Threats</em> half of the scan (forks &amp; pins), or a review of one of your
+    Next up: <a href="0004-the-greedy-queen.html">keeping the queen home</a>, or a review of one of your
     real games. Your call.
   </footer>
 
+<script src="../assets/chessboard.js"></script>
 <script>
-  const GLYPH = { K:'♚', Q:'♛', R:'♜', B:'♝', N:'♞', P:'♟' };
-  const FILES = ['a','b','c','d','e','f','g','h'];
-
   const puzzles = [
     {
       prompt: "Click the Black piece you can win for free.",
       turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, d1:{t:'R',c:'w'}, e4:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, d7:{t:'N',c:'b'} },
+      pieces: CB.fromFEN('6k1/3n4/8/8/4P3/8/8/3R2K1'),
       answer: 'd7',
-      good: "Yes. Your rook on d1 sees all the way up the open d-file. The knight is undefended — Rxd7 wins it.",
-      bad:  "Not quite. Look down open files and diagonals: which Black piece does one of your pieces already attack, with nothing defending it?"
+      good: "Yes. Your rook on d1 sees all the way up the open d-file. The knight on d7 is undefended — Rxd7 wins it.",
+      bad: "Not quite. Look down open files and diagonals: which Black piece does one of your pieces already attack, with nothing defending it?",
+      reveal: "The knight on d7 — your d1-rook attacks it up the open file, and nothing defends it."
     },
     {
       prompt: "One of YOUR pieces is hanging. Click the piece you must save.",
       turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, b5:{t:'B',c:'w'}, a2:{t:'P',c:'w'}, b2:{t:'P',c:'w'}, c2:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, a6:{t:'P',c:'b'}, b7:{t:'P',c:'b'} },
+      pieces: CB.fromFEN('6k1/1p6/p7/1B6/8/8/PPP5/6K1'),
       answer: 'b5',
       good: "Right. The pawn on a6 attacks your bishop, and nothing defends it. Move it now — if you don't, it's gone.",
-      bad:  "Look again from Black's side: which of your pieces is a Black pawn attacking, with no friendly piece defending it?"
+      bad: "Look again from Black's side: which of your pieces is a Black pawn attacking, with no friendly piece defending it?",
+      reveal: "Your bishop on b5 — the a6-pawn attacks it and nothing defends it. Save it."
     },
     {
       prompt: "Run the full scan, then click the Black piece you can win for free.",
       turn: "You are White, to move.",
-      pieces: { g1:{t:'K',c:'w'}, d1:{t:'Q',c:'w'}, f2:{t:'P',c:'w'}, g2:{t:'P',c:'w'}, h2:{t:'P',c:'w'},
-                g8:{t:'K',c:'b'}, d8:{t:'Q',c:'b'}, h3:{t:'B',c:'b'} },
+      pieces: CB.fromFEN('3q2k1/8/8/8/8/7b/5PPP/3Q2K1'),
       answer: 'h3',
-      good: "Clean. The bishop wandered to h3 — your g2 pawn attacks it and nothing defends it. gxh3 wins a bishop.",
-      bad:  "The queens are a distraction. Check your pawns: does one of them attack an undefended Black piece on the edge?"
+      good: "Clean. The bishop wandered to h3 — your g2-pawn attacks it and nothing defends it. gxh3 wins a bishop.",
+      bad: "The queens are a distraction. Check your pawns: does one of them attack an undefended Black piece on the edge?",
+      reveal: "The bishop on h3 — your g2-pawn attacks it, undefended. gxh3 wins it."
     }
   ];
-
-  function buildBoard(container, pz) {
-    const board = document.createElement('div');
-    board.className = 'board';
-    for (let rank = 8; rank >= 1; rank--) {
-      for (let file = 0; file < 8; file++) {
-        const sqName = FILES[file] + rank;
-        const sq = document.createElement('div');
-        const isLight = (file + rank) % 2 === 0;
-        sq.className = 'sq ' + (isLight ? 'light' : 'dark');
-        sq.dataset.sq = sqName;
-        const pc = pz.pieces[sqName];
-        if (pc) {
-          const span = document.createElement('span');
-          span.className = 'piece ' + pc.c;
-          span.textContent = GLYPH[pc.t];
-          sq.appendChild(span);
-        }
-        sq.addEventListener('click', () => handleClick(sq, pz, container));
-        board.appendChild(sq);
-      }
-    }
-    return board;
-  }
-
-  function handleClick(sq, pz, container) {
-    const fb = container.querySelector('.feedback');
-    container.querySelectorAll('.sq').forEach(s => s.classList.remove('hit','miss'));
-    if (sq.dataset.sq === pz.answer) {
-      sq.classList.add('hit');
-      fb.textContent = '✓ ' + pz.good;
-      fb.className = 'feedback good';
-    } else {
-      sq.classList.add('miss');
-      fb.textContent = '✗ ' + pz.bad;
-      fb.className = 'feedback bad';
-    }
-  }
-
   const root = document.getElementById('puzzles');
-  puzzles.forEach((pz, i) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'puzzle';
-    const prompt = document.createElement('p');
-    prompt.className = 'prompt';
-    prompt.textContent = (i + 1) + '. ' + pz.prompt;
-    const turn = document.createElement('p');
-    turn.className = 'turn';
-    turn.textContent = pz.turn;
-    wrap.appendChild(prompt);
-    wrap.appendChild(turn);
-    wrap.appendChild(buildBoard(wrap, pz));
-    const fb = document.createElement('p');
-    fb.className = 'feedback';
-    fb.textContent = '';
-    wrap.appendChild(fb);
-    root.appendChild(wrap);
-  });
+  puzzles.forEach((pz, i) => { pz.num = i + 1; CB.puzzle(root, pz); });
 </script>
 </body>
 </html>

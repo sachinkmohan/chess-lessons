@@ -32,5 +32,7 @@
   I go wrong" without being talked down to.
 
 ## Gaps
-- No personalized game review yet. Once the user shares a real lost game (PGN or screenshots),
-  we can build a lesson around their actual mistakes.
+- First personalized review done 2026-06-22 (9 games) → Lesson 3 (the ...e6 bishop trap as Black).
+  See LR-0004. Future: move-by-move walkthrough of a single loss; a "poison-pawn / greedy queen" mini-lesson.
+- chess.com public API is a good grounding source for this user (handle: sacmonrocks):
+  https://api.chess.com/pub/player/sacmonrocks/stats and /games/{YYYY}/{MM} for monthly PGN archives.
