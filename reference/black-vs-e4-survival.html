@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference: Black vs 1.e4 — Survival Card</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.5; max-width: 44rem; margin: 3rem auto; padding: 0 1.25rem; }
+  h1 { font-size: 1.6rem; margin: 0 0 .15rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.5rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+  h2.sec { font-size:1.08rem; margin:1.6rem 0 .4rem; }
+  .step { margin: 1rem 0; }
+  .step h3 { font-size: 1.02rem; margin: 0 0 .2rem; } .step h3 .num { color: var(--accent); font-weight: bold; }
+  .step p { margin: .2rem 0; } .ask { color: var(--soft); font-style: italic; }
+  .card { border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.25rem; background: #fffdf7; margin: 1.5rem 0; }
+  .card strong { color: var(--accent); }
+  .rule { border-left: 3px solid var(--good); background:#eef6ee; padding:.7rem 1rem; border-radius:0 6px 6px 0; margin:1.2rem 0; }
+  .rule strong { color: var(--good); }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; }
+  a { color: var(--accent); }
+  .boards { display:flex; flex-wrap:wrap; gap:1.1rem; margin:1rem 0 .5rem; }
+  figure.fig { margin:0; width:min(11rem, 70vw); }
+  figcaption { font-size:.8rem; margin-top:.35rem; line-height:1.3; }
+  figcaption.g { color:var(--good); } figcaption.g b{color:var(--good);}
+  figcaption.r { color:var(--bad); }  figcaption.r b{color:var(--bad);}
+  footer { color: var(--soft); font-size: .85rem; margin-top: 2rem; }
+  @media print { body { margin: 0; } a { color: var(--ink); } }
+</style>
+</head>
+<body>
+  <h1>Black vs 1.e4 — Survival Card</h1>
+  <p class="sub">You play <code>1&hellip;d5</code>. Here's what to do, whatever White replies.</p>
+
+  <div class="rule">
+    <strong>The golden rule:</strong> never play <code>&hellip;e6</code> until your light-squared
+    bishop (c8) is already developed to <strong>f5</strong> or <strong>g4</strong>. Bishop out, <em>then</em> e6.
+  </div>
+
+  <div class="boards">
+    <figure class="fig"><div id="b-trap"></div>
+      <figcaption class="r">&#10007; <b>&hellip;e6 first.</b> The c8-bishop is sealed behind its own pawns — trapped all game.</figcaption></figure>
+    <figure class="fig"><div id="b-free"></div>
+      <figcaption class="g">&#10003; <b>&hellip;Bf5 first.</b> The bishop is out and active. <em>Now</em> &hellip;e6 is perfectly safe.</figcaption></figure>
+  </div>
+
+  <hr>
+  <h2 class="sec">First decide: did White take your pawn?</h2>
+  <div class="boards">
+    <figure class="fig"><div id="b-exd5"></div>
+      <figcaption class="g"><b>2.exd5</b> — he accepts (the real Scandinavian). Take it back: <code>&hellip;Qxd5</code>, then tuck the queen to a5/d6 and develop.</figcaption></figure>
+    <figure class="fig"><div id="b-e5"></div>
+      <figcaption class="g"><b>2.e5</b> — he pushes past. Leave d5; get the bishop out (<code>&hellip;Bf5</code>), then <code>&hellip;e6</code>, <code>&hellip;c5</code>.</figcaption></figure>
+    <figure class="fig"><div id="b-nf3"></div>
+      <figcaption class="g"><b>2.Nf3 / Nc3 / d3</b> — he ignores it. Just develop: bishop out before e6, knights out, castle.</figcaption></figure>
+  </div>
+
+  <hr>
+  <h2 class="sec">The 3-move survival plan</h2>
+  <div class="step"><h3><span class="num">1.</span> Resolve the centre</h3>
+    <p>If White offers <code>exd5</code>, recapture. Otherwise leave d5 alone and develop.</p>
+    <p class="ask">Don't fixate on a "pawn fort" — fix your pieces, not your pawns.</p></div>
+  <div class="step"><h3><span class="num">2.</span> Bishop out, knights before the queen</h3>
+    <p><code>&hellip;Bf5</code>/<code>&hellip;Bg4</code> — <em>then</em> <code>&hellip;e6</code>. Develop
+    <code>&hellip;Nf6</code> and <code>&hellip;Nc6</code>. No early queen raids for pawns.</p></div>
+  <div class="step"><h3><span class="num">3.</span> Castle</h3>
+    <p>Bishop free + knight on f6 → castle kingside, connect the rooks, king safe.</p></div>
+
+  <div class="boards">
+    <figure class="fig"><div id="b-finished"></div>
+      <figcaption class="g"><b>The goal.</b> Bishop free on f5, knights out, king castled (g8). This is what "done right" looks like.</figcaption></figure>
+  </div>
+
+  <div class="card">
+    <p><strong>Two anti-patterns to never repeat (from your own games):</strong></p>
+    <ol>
+      <li><strong>&hellip;e6 too early</strong> → bishop trapped on c8 (cookieboi, MarianoParisi).</li>
+      <li><strong>Greedy queen</strong> grabbing b2/free pawns → queen chased, king exposed, mated
+      (see <a href="../lessons/0004-the-greedy-queen.html">Lesson 4</a>).</li>
+    </ol>
+  </div>
+
+  <footer>
+    Reference card. See the lesson: <a href="../lessons/0003-free-your-bishop.html">Free Your Bishop</a>.
+    Pairs with the <a href="cct-blunder-check.html">CCT Blunder-Check</a> — don't hang the freed bishop.
+  </footer>
+
+<script src="../assets/chessboard.js"></script>
+<script>
+  const sm = (id, fen, opts) => CB.render(document.getElementById(id),
+    Object.assign({ pieces: CB.fromFEN(fen), small: true }, opts || {}));
+
+  sm('b-trap', 'rnbqkbnr/ppp2ppp/4p3/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R', { highlights:{ c8:'red', e6:'red' } });
+  sm('b-free', 'rn1qkbnr/ppp1pppp/8/3p1b2/4P3/5N2/PPPP1PPP/RNBQKB1R',
+     { highlights:{ f5:'green' }, arrows:[{ from:'c8', to:'f5', color:'green' }] });
+  sm('b-exd5', 'rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR',
+     { arrows:[{ from:'d8', to:'d5', color:'green' }] });
+  sm('b-e5', 'rnbqkbnr/ppp1pppp/8/3pP3/8/8/PPPP1PPP/RNBQKBNR',
+     { arrows:[{ from:'c8', to:'f5', color:'green' }] });
+  sm('b-nf3', 'rnbqkbnr/ppp1pppp/8/3p4/4P3/5N2/PPPP1PPP/RNBQKB1R',
+     { arrows:[{ from:'c8', to:'f5', color:'green' }] });
+  sm('b-finished', 'r2q1rk1/pp1nbppp/2p1pn2/3p1b2/3P4/2N2N2/PPP1BPPP/R1BQ1RK1',
+     { highlights:{ g8:'green', f5:'green' } });
+</script>
+</body>
+</html>

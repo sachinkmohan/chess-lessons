@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 — The Greedy Queen</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
+  .good-box { border-left: 3px solid var(--good); background: #eef6ee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
+  ol.plan { margin:.6rem 0; padding-left:1.2rem; } ol.plan li { margin:.35rem 0; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.9em; }
+  .movetrail { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.82rem; line-height:1.5;
+    background:#fffdf7; border:1px solid var(--rule); border-radius:8px; padding:.7rem 1rem; }
+  .movetrail b { color:var(--bad); }
+  figure.fig { margin:1.2rem 0; }
+  figure.fig figcaption { font-size:.86rem; color:var(--soft); margin-top:.4rem; max-width:24rem; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; }
+</style>
+</head>
+<body>
+  <p class="kicker">Lesson 4 &middot; From your game vs bandi-Sai-Harsha (2026-06-22)</p>
+  <h1>The Greedy Queen</h1>
+  <p class="sub">You won this game. You also nearly threw it away — and against a better player, you would have.</p>
+
+  <div class="good-box">
+    <strong>First, credit where it's due.</strong> In these four Rapid games you (1) played <em>Rapid</em>,
+    not bullet — exactly as we agreed; (2) developed your bishop <em>before</em> <code>&hellip;e6</code> vs the
+    <code>2.e5</code> line (Lesson 3, working!); and (3) finished a game with a clean checkmate as White.
+    Your rating went 482 &rarr; 551 in one sitting. This lesson is the one thing standing between you and
+    doing it <em>safely</em>.</p>
+  </div>
+
+  <h2>What actually happened</h2>
+  <p>You reached a real Scandinavian and recaptured correctly. Then your queen went hunting:</p>
+  <p class="movetrail">9&hellip; <b>Qxd4</b> &nbsp; 10&hellip; <b>Qxb2</b> &nbsp; 11&hellip; Qb4+ &nbsp;
+  12&hellip; Qb2 &nbsp; 13&hellip; Qf6 &nbsp; 14&hellip; Ne5 &nbsp; 15&hellip; Qxg5</p>
+
+  <figure class="fig">
+    <div id="journey"></div>
+    <figcaption>
+      <b>Your queen's tour.</b> She started safe on <span class="cb-chip red">d5</span>, then
+      <span style="color:var(--bad)"><b>grabbed two pawns</b></span> (steps 1&ndash;2:
+      <span class="cb-chip red">d4</span>, <span class="cb-chip red">b2</span>) and got
+      <span style="color:#555"><b>chased around</b></span> (steps 3&ndash;4:
+      <span class="cb-chip">f6</span>, <span class="cb-chip">g5</span>) &mdash; four+ moves on one piece
+      while the rest of your army never moved.
+    </figcaption>
+  </figure>
+
+  <p>Now look what your <em>opponent</em> was doing on those same moves. Each time he attacked your queen,
+  he <strong>developed a piece for free</strong>:</p>
+
+  <figure class="fig">
+    <div id="whitearmy"></div>
+    <figcaption>
+      The highlighted squares are White's free development while your queen ran:
+      bishop to <span class="cb-chip">d2</span>, rook to <span class="cb-chip">c1</span>, knight to
+      <span class="cb-chip">g5</span>, king castled to <span class="cb-chip">g1</span>. He built a whole
+      army; you moved a queen. You won only because he then blundered a knight and walked into mate.
+    </figcaption>
+  </figure>
+
+  <div class="warn">
+    <strong>The cost of a queen pawn-grab.</strong> When the queen takes a pawn, the opponent usually
+    <em>attacks her</em> with a developing move. You gain 1 pawn; he gains a tempo (a free move) <em>and</em>
+    the initiative — and your queen risks getting trapped. A terrible trade while your own pieces sit at home.
+  </div>
+
+  <h2>The "should I take it?" check</h2>
+  <p>Before grabbing a pawn with the queen, all three must be true:</p>
+  <ol class="plan">
+    <li><strong>It's truly free</strong> — the pawn isn't defended, and taking it isn't a trap.</li>
+    <li><strong>Your queen won't be chased</strong> — no enemy piece can hit her with tempo right after.</li>
+    <li><strong>You're not behind in development</strong> — your own pieces are out and your king is safe.</li>
+  </ol>
+  <p>Fail any one? Leave the pawn. The <code>b2</code> / <code>b7</code> pawn especially is famous bait —
+  the "poison pawn." <a href="https://www.youtube.com/playlist?list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm">GM Aman
+  Hambleton's first rule</a> in <em>Building Habits</em> is literally "don't bring the queen out early."</p>
+
+  <hr>
+  <h2>Now you try</h2>
+  <p>Click the square you'd move to. <span style="color:var(--good)"><b>Green</b></span> = right move,
+  <span style="color:var(--bad)"><b>red</b></span> = the greedy trap. The shaded squares are the ones I'm
+  pointing at in the prompt. Stuck? Hit <em>Show me the answer</em>.</p>
+
+  <div id="puzzles"></div>
+
+  <hr>
+  <div class="scanbox">
+    <p style="margin:.2rem 0;"><strong>Your tangible win this session:</strong> when your queen eyes a free
+    pawn, run the 3-point check first. One extra pawn is never worth a trapped queen or three tempi of
+    development. Park the queen, develop, castle — <em>then</em> hunt.</p>
+  </div>
+
+  <h2>Go deeper</h2>
+  <p><strong>Primary source:</strong> <a href="https://www.youtube.com/playlist?list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm">Building Habits</a>
+  — watch how a GM deliberately leaves pawns alone to keep developing. That patience is the whole skill.</p>
+  <p>See also <a href="0001-the-three-second-scan.html">Lesson 1: The 3-Second Scan</a>,
+  <a href="0003-free-your-bishop.html">Lesson 3: Free Your Bishop</a>, and the
+  <a href="../reference/black-vs-e4-survival.html">Black vs 1.e4 survival card</a>.</p>
+
+  <div class="ask" style="margin-top:1.4rem;">
+    <strong>I'm your teacher — ask me anything.</strong> Want me to show the exact line where your
+    queen <em>would</em> have been trapped, or when grabbing a pawn IS correct? Just ask.
+  </div>
+
+  <footer>
+    <p style="margin:0 0 .6rem;"><a href="../index.html">&larr; Home</a></p>
+    You're climbing fast and in the right format. Next: keep the queen home, and the wins stop being luck.
+  </footer>
+
+<script src="../assets/chessboard.js"></script>
+<script>
+  // The queen's tour: one piece, four+ moves. Red = greedy grabs, slate = chased.
+  CB.render(document.getElementById('journey'), {
+    pieces: { d5: { t:'Q', c:'b' } },
+    arrows: [
+      { from:'d5', to:'d4', color:'red' }, { from:'d4', to:'b2', color:'red' },
+      { from:'b2', to:'f6', color:'slate' }, { from:'f6', to:'g5', color:'slate' }
+    ],
+    badges: [
+      { sq:'d4', n:1, color:'red' }, { sq:'b2', n:2, color:'red' },
+      { sq:'f6', n:3, color:'slate' }, { sq:'g5', n:4, color:'slate' }
+    ]
+  });
+
+  // What White built "for free" while the queen wandered (position ~move 14).
+  CB.render(document.getElementById('whitearmy'), {
+    pieces: CB.fromFEN('4k3/8/8/6N1/2P5/5Q2/P2BBPPP/2R2RK1'),
+    highlights: { d2:'mark', c1:'mark', g5:'mark', g1:'mark' }
+  });
+
+  const puzzles = [
+    {
+      prompt: "Your real game. White just played Be3 (shaded), attacking your queen on d4 (shaded). You COULD grab another pawn with …Qxb2. Find the safer move.",
+      turn: "You are Black, to move.",
+      pieces: CB.fromFEN('r1b1k2r/ppp1bppp/2n1p3/8/2Pq4/4BQ1N/PP2BPPP/R3K2R'),
+      highlights: { e3:'mark', d4:'mark' },
+      best: ['d6','d7'], bestFrom: 'd4', trap: { from:'d4', to:'b2' },
+      good: "Right — retreat the queen to safety (…Qd6) and get ready to castle. You keep the game calm and let your pieces come out.",
+      trapMsg: "The poison pawn! This is what you played. After …Qxb2, White hits the queen with Rc1/Rb1 and develops with tempo while she runs. You only survived because he blundered.",
+      bad: "Your queen is attacked by the bishop on e3 — she must move. Don't go pawn-hunting deeper into White's camp; retreat to a safe, useful square.",
+      reveal: "Green = …Qd6, safe and sound. Red = …Qxb2, the greedy grab that nearly cost you the game."
+    },
+    {
+      prompt: "Queen's home safe, pieces developed. There's a juicy pawn on h2 (shaded) — and your king is still in the centre. Find the best move.",
+      turn: "You are Black, to move.",
+      pieces: CB.fromFEN('r3k2r/pppbbppp/2nqpn2/8/2P5/2N1B3/PP2BPPP/R2Q1RK1'),
+      highlights: { h2:'mark', g1:'red' },
+      best: ['g8'], bestFrom: 'e8', trap: { from:'d6', to:'h2' },
+      good: "Yes! Castle. King safe, rook joins the game. Boring beats brilliant — this is how you convert a good position instead of gambling it.",
+      trapMsg: "Disaster — h2 is guarded by the White king on g1 (shaded red), so Kxh2 just wins your queen. And even if it weren't, your own king is still uncastled.",
+      bad: "Your development is done; the urgent job is king safety. Tuck the king toward the h-rook.",
+      reveal: "Green = O-O, king to safety. Red = …Qxh2??, hanging your queen to Kxh2."
+    }
+  ];
+  const root = document.getElementById('puzzles');
+  puzzles.forEach((pz, i) => { pz.num = i + 1; CB.puzzle(root, pz); });
+</script>
+</body>
+</html>
