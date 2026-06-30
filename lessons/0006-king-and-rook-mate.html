@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6 — Finish It: King &amp; Rook vs Lone King</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .good-box { border-left: 3px solid var(--good); background: #eef6ee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .rule-card { border: 2px solid var(--accent); background: #fffdf7; border-radius: 8px; padding: 1rem 1.4rem; margin: 1.6rem 0; }
+  .rule-card .rule-title { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; font-family: Georgia, serif; }
+  .rule-card .rule-body { font-size: 1.05rem; line-height: 1.65; }
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 1rem 0; }
+  .steps li { position: relative; padding: .55rem 0 .55rem 2.6rem; border-bottom: 1px solid var(--rule); }
+  .steps li:last-child { border-bottom: 0; }
+  .steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: .5rem;
+    width: 1.8rem; height: 1.8rem; background: var(--accent); color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: .95rem; }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  figure.fig { margin: 1.4rem 0; }
+  figure.fig figcaption { font-size: .86rem; color: var(--soft); margin-top: .5rem; max-width: 26rem; line-height: 1.4; }
+  .material { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin: .8rem 0 1.2rem; font-size: 1.05rem; }
+  .material .side { padding: .35rem .8rem; border-radius: 6px; line-height: 1.4; }
+  .material .side.black { background: #2a2a2a; color: #f5f5f5; }
+  .material .side.white { background: #e8e4dc; color: #1a1a1a; border: 1px solid var(--rule); }
+  .material .vs { color: var(--soft); font-style: italic; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin-top: 2rem; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+  <p class="kicker">Lesson 6 &middot; From your game vs Marcopolo_38 &middot; 2026-06-29</p>
+  <h1>Finish It: King &amp; Rook vs a Lone King</h1>
+  <p class="sub">You had a rook, a knight, and a pawn against a bare king &mdash; and the game was a draw. Not because the position was hard. Because the clock ran out before you delivered mate.</p>
+
+  <h2>The story in brief</h2>
+  <p>By move 71 you had ground the game down to this. Your opponent had nothing but a king:</p>
+
+  <div class="material">
+    <div class="side white">♔ King &nbsp;&nbsp;♖ Rook &nbsp;&nbsp;♘ Knight &nbsp;&nbsp;+ a pawn</div>
+    <span class="vs">vs</span>
+    <div class="side black">♚ King &nbsp;&nbsp;(nothing else)</div>
+  </div>
+
+  <figure class="fig">
+    <div id="board-game"></div>
+    <figcaption>
+      Your real final position (you are White). King on <span class="cb-chip">a5</span>,
+      rook on <span class="cb-chip green">c5</span>, knight on <span class="cb-chip">a7</span>, pawn on
+      <span class="cb-chip">a2</span>. Black has a lone king on <span class="cb-chip">d6</span>.
+      This is a forced mate in a handful of moves.
+    </figcaption>
+  </figure>
+
+  <div class="warn">
+    <strong>What the scoreboard said:</strong> &ldquo;Game drawn by timeout vs insufficient material.&rdquo;
+    Your flag fell. Because your opponent had only a king (not enough to ever checkmate <em>you</em>),
+    the rules give a <strong>draw</strong> instead of a loss &mdash; so you escaped with half a point.
+    But this was a <strong>full point</strong> that walked out the door. You spent moves 59&ndash;71
+    shuffling without landing the mate.
+  </div>
+
+  <h2>The key realisation</h2>
+  <p>You had a rook <em>and</em> a knight here &mdash; but you only needed the <strong>rook</strong>.
+  A King + Rook mates a lone king <strong>every single time</strong>, by a fixed recipe. It is not
+  calculation. It is a method you repeat until the enemy king is squeezed against the edge. Once you
+  know it, it takes under a minute.</p>
+
+  <h2>The method: build a shrinking box</h2>
+  <p>Your rook draws a wall the enemy king cannot cross. Your king does the pushing. Together you
+  shrink the box until the king is trapped on the edge of the board.</p>
+
+  <figure class="fig">
+    <div id="board-box"></div>
+    <figcaption>
+      The rook on <span class="cb-chip">d1</span> builds a wall down the
+      <span class="cb-chip blue">d-file</span>. The black king on <span class="cb-chip">f6</span> is
+      now caged in the right-hand half of the board. Your king on <span class="cb-chip">e4</span>
+      marches up to drive it back.
+    </figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li><strong>Cage the king.</strong> Put your rook on a file or rank that the enemy king can&rsquo;t cross. Now it&rsquo;s stuck on one side &mdash; the &ldquo;box.&rdquo;</li>
+    <li><strong>March your king up</strong> until it stands directly facing the enemy king, one square apart (this is called the <em>opposition</em>).</li>
+    <li><strong>Check with the rook from the side.</strong> The enemy king can&rsquo;t step toward your king, so it&rsquo;s shoved back one rank &mdash; the box just got smaller.</li>
+    <li><strong>Repeat</strong> steps 2&ndash;3 until the king is on the very edge. Then one more rook check along the edge is checkmate.</li>
+  </ol>
+
+  <h2>Puzzle 1 — push the king back</h2>
+  <p>Your king on <span class="cb-chip">e5</span> faces the enemy king on <span class="cb-chip">e7</span>
+  &mdash; you have the opposition. Your rook is on <span class="cb-chip green">a1</span>, perfectly placed
+  on the side. How do you drive the black king back toward the edge?</p>
+
+  <div id="puzzle1"></div>
+
+  <h2>Puzzle 2 — don&rsquo;t shuffle, take the mate</h2>
+  <p>You&rsquo;ve done the work: the black king is on the edge at <span class="cb-chip">g8</span>, your
+  king guards from <span class="cb-chip">g6</span>, rook on <span class="cb-chip green">a7</span>.
+  There is a checkmate <em>right now</em>. Find it &mdash; don&rsquo;t play another waiting move.</p>
+
+  <div id="puzzle2"></div>
+
+  <hr>
+
+  <div class="rule-card">
+    <div class="rule-title">The King-and-Rook Recipe</div>
+    <div class="rule-body">
+      <strong>Wall, walk, check.</strong><br><br>
+      <strong>Wall</strong> &mdash; rook makes a line the enemy king can&rsquo;t cross.<br>
+      <strong>Walk</strong> &mdash; your king steps up to face the enemy king.<br>
+      <strong>Check</strong> &mdash; rook checks from the side; the box shrinks one rank.<br><br>
+      Repeat until the king hits the edge, then check along the edge for mate. And before <em>every</em>
+      rook move, recall <a href="0005-your-win-slipped-away.html">Lesson 5</a>: make sure the king still
+      has a square, or you&rsquo;ll stalemate instead of mate.
+    </div>
+  </div>
+
+  <h2>The other half of the lesson: the clock</h2>
+  <p>You knew you were winning &mdash; that&rsquo;s why you kept playing. But a won position is only
+  worth a point if you <em>land</em> it before the flag falls. Two habits would have saved this game:</p>
+
+  <div class="scanbox">
+    <strong>1. When you&rsquo;re ahead, simplify and finish.</strong> You didn&rsquo;t need to keep the
+    knight <em>and</em> the rook circling. Trade or ignore the extra pieces, pick the rook, and run the
+    recipe. Fewer pieces = faster mate = no clock risk.<br><br>
+    <strong>2. After move 20, glance at your clock every few moves.</strong> If it&rsquo;s under two
+    minutes and you&rsquo;re winning, switch to your fastest forced plan &mdash; here, the King + Rook box.
+  </div>
+
+  <h2>What else came up in these games</h2>
+  <p>Twelve rapid games, Jun 26&ndash;30. Beyond this one, two patterns to file away for later sessions:</p>
+  <ul>
+    <li><strong>Mated by a rook-lift (vs R_Abarna).</strong> You let the f-pawn reach f6 near your castled king, then Rxg7+ &rarr; Rh7 &rarr; Rh8#. When an enemy pawn lands on f6 (or f3 against you), treat it as a fire alarm.</li>
+    <li><strong>The clock again (vs vihu49).</strong> Lost on time with two seconds left in a playable position. Same root cause as this lesson &mdash; the clock-glance habit fixes both.</li>
+  </ul>
+
+  <div class="ask">
+    <strong>Ask your teacher.</strong> Want to drill the King + Rook mate live until it&rsquo;s automatic?
+    Say the word and I&rsquo;ll set up a few timed reps. Or if a different game in this batch is bugging
+    you &mdash; a loss that didn&rsquo;t make sense &mdash; tell me which and we&rsquo;ll walk through it.
+  </div>
+
+  <footer>
+    Lesson 6 of <a href="../lessons/">all lessons</a> &middot;
+    <a href="0002-finishing-the-job.html">Lesson 2: Finishing the Job</a> &middot;
+    <a href="0005-your-win-slipped-away.html">Lesson 5: Your Win Slipped Away</a> &middot;
+    <a href="../reference/improvement-roadmap.html">Roadmap</a>
+  </footer>
+
+</body>
+<script src="../assets/chessboard.js"></script>
+<script>
+  // Real final position vs Marcopolo_38 (White to move, move 72): Ka5 Na7 Rc5 Pa2 vs Kd6
+  CB.render(document.getElementById('board-game'), {
+    pieces: CB.fromFEN('8/N7/3k4/K1R5/8/8/P7/8'),
+    highlights: { c5: 'green', a5: 'mark', d6: 'red' }
+  });
+
+  // Method board: rook walls the d-file, black king caged on the right
+  CB.render(document.getElementById('board-box'), {
+    pieces: CB.fromFEN('8/8/5k2/8/4K3/8/8/3R4'),
+    highlights: { d8: 'blue', d7: 'blue', d6: 'blue', d5: 'blue', d4: 'blue', d3: 'blue', d2: 'blue', f6: 'red', e4: 'mark' }
+  });
+
+  // Puzzle 1: Ke5 vs Ke7 (opposition), Ra1. Ra7+ drives the king to the 8th rank.
+  CB.puzzle(document.getElementById('puzzle1'), {
+    num: 1,
+    prompt: 'White to move. Your kings face off (e5 vs e7) and your rook is on the side. Drive the black king back toward the edge.',
+    turn: 'w',
+    pieces: CB.fromFEN('8/4k3/8/4K3/8/8/8/R7'),
+    highlights: { e5: 'mark', e7: 'red', a1: 'green' },
+    bestFrom: 'a1',
+    best: ['a7'],
+    trap: { from: 'a1', to: 'e1' },
+    good: '✓ Ra7+ — a check from the SIDE. The black king can\'t step to the 6th rank (your king guards d6, e6, f6), so it\'s forced up to the back rank (d8/e8/f8). The box just shrank. Walk your king up and repeat.',
+    trapMsg: '✗ Re1+ checks down the same file the kings stand on. The king just slides sideways to d7 or f7 — no progress, and you\'ve given up the opposition. Check from the side, not from in front.',
+    bad: 'You want a rook check that pushes the king BACKWARD. Your king already covers the 6th-rank squares, so check along the 7th rank from the side.',
+    reveal: 'Ra7+. Check along the 7th rank from the a-file (the side). The black king cannot come forward — your king covers d6/e6/f6 — so it retreats to the 8th rank. Bring your king up and repeat the squeeze.'
+  });
+
+  // Puzzle 2: Kg6, Ra7 vs Kg8 on the edge. Ra8# is mate. Rb7 (shuffle) throws it away.
+  CB.puzzle(document.getElementById('puzzle2'), {
+    num: 2,
+    prompt: 'White to move. Black king is on the edge at g8, your king guards from g6. There is checkmate in one — find it.',
+    turn: 'w',
+    pieces: CB.fromFEN('6k1/R7/6K1/8/8/8/8/8'),
+    highlights: { g8: 'red', g6: 'mark', a7: 'green' },
+    bestFrom: 'a7',
+    best: ['a8'],
+    trap: { from: 'a7', to: 'b7' },
+    good: '✓ Ra8# — checkmate. The king on g8 has no escape: f7, g7 and h7 are covered by your king on g6, and f8/h8 are covered by your rook along the 8th rank. Game over.',
+    trapMsg: '✗ Rb7 is another shuffle — exactly the move that cost you the real game. You had mate in one and passed it up. After Rb7, Kf8 simply walks free. When the mate is there, take it.',
+    bad: 'The king is already boxed against the edge and your king covers every 7th-rank escape. One rook move delivers mate along the 8th rank.',
+    reveal: 'Ra8#. Slide the rook to the back rank: it checks the king on g8, and your king on g6 covers the only escape squares (f7, g7, h7). Checkmate — no shuffling required.'
+  });
+</script>
+</html>

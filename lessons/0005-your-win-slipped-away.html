@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 — Your Win Slipped Away</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .good-box { border-left: 3px solid var(--good); background: #eef6ee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .rule-card { border: 2px solid var(--accent); background: #fffdf7; border-radius: 8px; padding: 1rem 1.4rem; margin: 1.6rem 0; }
+  .rule-card .rule-title { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; font-family: Georgia, serif; }
+  .rule-card .rule-body { font-size: 1.05rem; line-height: 1.65; }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  figure.fig { margin: 1.4rem 0; }
+  figure.fig figcaption { font-size: .86rem; color: var(--soft); margin-top: .5rem; max-width: 26rem; line-height: 1.4; }
+  .material { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin: .8rem 0 1.2rem; font-size: 1.05rem; }
+  .material .side { padding: .35rem .8rem; border-radius: 6px; line-height: 1.4; }
+  .material .side.black { background: #2a2a2a; color: #f5f5f5; }
+  .material .side.white { background: #e8e4dc; color: #1a1a1a; border: 1px solid var(--rule); }
+  .material .vs { color: var(--soft); font-style: italic; }
+  .escape-check { margin: .8rem 0; }
+  .escape-check li { margin: .3rem 0; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin-top: 2rem; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+  <p class="kicker">Lesson 5 &middot; From your game vs JONFLACOM &middot; 2026-06-28</p>
+  <h1>Your Win Slipped Away</h1>
+  <p class="sub">You had Queen + Rook + Bishop against a lone king. The game ended in a draw. One two-second check would have prevented it.</p>
+
+  <h2>The story in brief</h2>
+  <p>You played the Scandinavian as Black. By move 49, queens were traded and you reached a pure endgame with this material count:</p>
+
+  <div class="material">
+    <div class="side black">♛ Queen &nbsp;&nbsp;♜ Rook &nbsp;&nbsp;♝ Bishop &nbsp;&nbsp;+ 3 pawns</div>
+    <span class="vs">vs</span>
+    <div class="side white">♔ King &nbsp;&nbsp;♗ Bishop &nbsp;&nbsp;♟ one pawn</div>
+  </div>
+
+  <p>You were completely winning. Then, with seven moves left to go, you walked into a trap you'd already seen in <a href="0002-finishing-the-job.html">Lesson 2</a>.</p>
+
+  <h2>The fatal position — move 56</h2>
+  <p>After a long shuffle, White's king retreated to <span class="cb-chip">h3</span>. Their last active piece was a bishop, sitting on <span class="cb-chip red">f4</span>. Your rook was right on <span class="cb-chip">f5</span>, one square away. Free bishop — take it, right?</p>
+
+  <figure class="fig">
+    <div id="board-fatal"></div>
+    <figcaption>
+      Position after 56.Kh3. Your rook on <span class="cb-chip green">f5</span> and queen on
+      <span class="cb-chip green">g1</span> look imposing. The bishop on <span class="cb-chip red">f4</span>
+      seems free for the taking.
+    </figcaption>
+  </figure>
+
+  <p>You played <strong>56&hellip;Rxf4</strong> — and the game was immediately declared a draw by stalemate.</p>
+
+  <div class="warn">
+    <strong>Count White&rsquo;s legal moves after 56&hellip;Rxf4:</strong>
+    <ul class="escape-check">
+      <li><strong>Kh3 &rarr; h4</strong> — your rook on f4 controls the entire 4th rank. &cross; Blocked.</li>
+      <li><strong>Kh3 &rarr; g4</strong> — rook on f4 controls g4. &cross; Blocked.</li>
+      <li><strong>Kh3 &rarr; g3</strong> — your queen on g1 controls the g-file. &cross; Blocked.</li>
+      <li><strong>Kh3 &rarr; g2</strong> — queen controls g2. &cross; Blocked.</li>
+      <li><strong>Kh3 &rarr; h2</strong> — queen on g1 attacks h2 diagonally. &cross; Blocked.</li>
+      <li><strong>Pawn h6 &rarr; h7</strong> — your king sits on h7. &cross; Blocked.</li>
+    </ul>
+    Zero legal moves. King not in check. <strong>Stalemate — automatic draw.</strong>
+  </div>
+
+  <h2>Puzzle 1 — find the winning move</h2>
+  <p>You&rsquo;re back in the same position, before the blunder. Your queen is on <span class="cb-chip">g1</span>, rook on <span class="cb-chip">f5</span>. What do you play?</p>
+
+  <div id="puzzle1"></div>
+
+  <h2>Why Qg2+ wins cleanly</h2>
+  <p>After <strong>56&hellip;Qg2+</strong>, the White king is in check — it <em>must</em> move. The only safe square is <span class="cb-chip green">h4</span>. Now the stalemate danger is gone: the king has room. You play <strong>57&hellip;Rxf4+</strong>, winning the bishop with check. The king keeps moving, and you convert your material advantage normally.</p>
+
+  <figure class="fig">
+    <div id="board-solution"></div>
+    <figcaption>
+      After 56&hellip;Qg2+ Kh4. The king has been nudged to <span class="cb-chip green">h4</span>
+      — it now has escape squares. Next: Rxf4+ wins the bishop and the game continues.
+      No stalemate possible.
+    </figcaption>
+  </figure>
+
+  <hr>
+
+  <div class="rule-card">
+    <div class="rule-title">The Stalemate Check</div>
+    <div class="rule-body">
+      Before capturing your opponent&rsquo;s <strong>last active piece</strong>, pause and ask:<br><br>
+      <em>&ldquo;After I take this, can the enemy king move <strong>anywhere</strong>?&rdquo;</em><br><br>
+      If you&rsquo;re not sure — deliver a <strong>check first</strong>. A check forces the king to a new square, opening up escape routes. Then capture. Never the other way around.
+    </div>
+  </div>
+
+  <h2>Puzzle 2 — apply the rule in a new position</h2>
+  <p>Classic K+Q vs K. Your queen is on <span class="cb-chip">a5</span>, your king on <span class="cb-chip">b3</span>. The White king is cornered on <span class="cb-chip">a1</span>. One natural-looking queen move ends in an immediate draw. <strong>Find the winning move.</strong></p>
+
+  <div id="puzzle2"></div>
+
+  <hr>
+
+  <h2>The other side of stalemate</h2>
+  <p>This lesson is about <em>avoiding</em> stalemate when you&rsquo;re winning. But the same rule is a weapon when you&rsquo;re losing: if your king has no moves and you have no pieces, try to manoeuvre into a position where your opponent might accidentally stalemate you. It can turn a certain loss into a draw. You don&rsquo;t need to know this deeply yet — just note that it exists.</p>
+
+  <div class="scanbox">
+    <strong>Your pre-capture habit.</strong> Whenever you&rsquo;re about to take the opponent&rsquo;s
+    last piece, freeze and count their king&rsquo;s legal squares. If the count is zero or might become
+    zero after your move — give a check first. This takes two seconds and saves games.
+  </div>
+
+  <h2>What else came up in these games</h2>
+  <p>Twelve rapid games, Jun 26–30. The stalemate was the clearest lesson. Two other patterns worth noting, for future sessions:</p>
+  <ul>
+    <li><strong>Time trouble (game vs vihu49).</strong> You had 2 seconds left in a complex position and lost on the clock — despite having reasonable material. The habit to build: after move 20, glance at the clock every few moves.</li>
+    <li><strong>Greedy captures early (game vs martinon2).</strong> You took the c2 pawn on move 7 with your bishop — opening up lines against your own king. The same pattern from <a href="0004-the-greedy-queen.html">Lesson 4</a>, this time with a bishop. If a pawn grab moves a piece <em>toward</em> the centre of the opponent&rsquo;s active pieces, it&rsquo;s probably a trap.</li>
+  </ul>
+
+  <div class="ask">
+    <strong>Ask your teacher.</strong> Did any moment in these games confuse you — a position where you weren&rsquo;t sure what to do, or a loss that didn&rsquo;t make sense? Share it here and we&rsquo;ll dig in. You can always say &ldquo;I don&rsquo;t understand why I lost this one&rdquo; and we&rsquo;ll walk through it.
+  </div>
+
+  <footer>
+    Lesson 5 of <a href="../lessons/">all lessons</a> &middot;
+    <a href="0002-finishing-the-job.html">Lesson 2: Finishing the Job</a> &middot;
+    <a href="0004-the-greedy-queen.html">Lesson 4: The Greedy Queen</a> &middot;
+    <a href="../reference/improvement-roadmap.html">Roadmap</a>
+  </footer>
+
+</body>
+<script src="../assets/chessboard.js"></script>
+<script>
+  // Fatal position: after 56.Kh3, Black to move
+  // White: Kh3, Bf4, Ph6 | Black: Kh7, Qg1, Rf5, Be4, Pb7, Pf6
+  var fatalFEN = '8/1p5k/5p1P/5r2/4bB2/7K/8/6q1 b - - 0 56';
+
+  CB.render(document.getElementById('board-fatal'), {
+    pieces: CB.fromFEN(fatalFEN),
+    highlights: { f4: 'red', h3: 'mark', f5: 'green', g1: 'green' },
+    arrows: [ { from: 'f5', to: 'f4', color: 'red' } ]
+  });
+
+  // Puzzle 1: find the good move (Qg2+) and avoid the trap (Rxf4)
+  CB.puzzle(document.getElementById('puzzle1'), {
+    num: 1,
+    prompt: 'Black to move. The white bishop on f4 is one square away. Should you take it?',
+    turn: 'b',
+    pieces: CB.fromFEN(fatalFEN),
+    highlights: { f4: 'red', h3: 'mark' },
+    bestFrom: 'g1',
+    best: ['g2', 'g3', 'h2'],
+    trap: { from: 'f5', to: 'f4' },
+    good: '✓ Correct — you give check first. The king must move to h4 (only legal square). Now Rxf4+ captures the bishop safely. No stalemate.',
+    trapMsg: '✗ Rxf4 — the bishop is taken but count the king\'s moves: h4 (rook controls), g4 (rook controls), g3 (queen controls), g2 (queen controls), h2 (queen diagonal). Zero moves. The h6 pawn can\'t advance either — your king blocks h7. Stalemate: half a point instead of a full win.',
+    bad: 'Look at the queen — can it give check? A check forces the king to move first.',
+    reveal: 'Qg2+ (or Qg3+, or Qh2+) — any queen move that gives check works. The king is forced to h4, escaping the stalemate zone. Then Rxf4+ wins the bishop with check, and you proceed to win normally.'
+  });
+
+  // Solution board: after 56...Qg2+ Kh4
+  // White: Kh4, Bf4, Ph6 | Black: Kh7, Qg2, Rf5, Be4, Pb7, Pf6
+  var solPieces = {
+    h4: { t: 'K', c: 'w' }, f4: { t: 'B', c: 'w' }, h6: { t: 'P', c: 'w' },
+    h7: { t: 'K', c: 'b' }, g2: { t: 'Q', c: 'b' }, f5: { t: 'R', c: 'b' },
+    e4: { t: 'B', c: 'b' }, b7: { t: 'P', c: 'b' }, f6: { t: 'P', c: 'b' }
+  };
+  CB.render(document.getElementById('board-solution'), {
+    pieces: solPieces,
+    highlights: { h4: 'green', g2: 'green', f4: 'red' },
+    arrows: [
+      { from: 'g1', to: 'g2', color: 'green' },
+      { from: 'h3', to: 'h4', color: 'slate' },
+      { from: 'f5', to: 'f4', color: 'green' }
+    ]
+  });
+
+  // Puzzle 2: K+Q vs K — avoid Qa2 stalemate, play Qb4+
+  // White: Ka1 | Black: Kb3, Qa5
+  var puz2FEN = '8/8/8/q7/8/1k6/8/K7 b - - 0 1';
+  CB.puzzle(document.getElementById('puzzle2'), {
+    num: 2,
+    prompt: 'Black to move. White king is on a1. You have a queen on a5. One tempting queen move draws instantly — find the move that wins.',
+    turn: 'b',
+    pieces: CB.fromFEN(puz2FEN),
+    highlights: { a1: 'mark', a5: 'green' },
+    bestFrom: 'a5',
+    best: ['b4', 'b5', 'a4'],
+    trap: { from: 'a5', to: 'a2' },
+    good: '✓ Check! The king must move. After Ka2, Qb2 is checkmate. Clean win — no stalemate risk because you gave check first.',
+    trapMsg: '✗ Qa2 — immediate stalemate. The White king on a1 cannot go to a2 (your queen), b2 (queen diagonal), or b1 (queen diagonal). You\'ve covered every escape square and the king isn\'t in check. Draw.',
+    bad: 'Look for a check — it forces the king to move and eliminates all stalemate risk.',
+    reveal: 'Qb4+! The king must move to a2. Then Qb2 is checkmate. The pattern: check first, corner second. A checking move always gives the king at least one square to go, so stalemate is impossible.'
+  });
+</script>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 7 — The f6 Fire Alarm</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .good-box { border-left: 3px solid var(--good); background: #eef6ee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .rule-card { border: 2px solid var(--accent); background: #fffdf7; border-radius: 8px; padding: 1rem 1.4rem; margin: 1.6rem 0; }
+  .rule-card .rule-title { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; font-family: Georgia, serif; }
+  .rule-card .rule-body { font-size: 1.05rem; line-height: 1.65; }
+  .seq { list-style: none; padding: 0; margin: 1rem 0; }
+  .seq li { padding: .5rem 0 .5rem 0; border-bottom: 1px solid var(--rule); }
+  .seq li:last-child { border-bottom: 0; }
+  .seq .mv { font-weight: bold; color: var(--accent); display: inline-block; min-width: 5.2rem; }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  figure.fig { margin: 1.4rem 0; }
+  figure.fig figcaption { font-size: .86rem; color: var(--soft); margin-top: .5rem; max-width: 26rem; line-height: 1.4; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin-top: 2rem; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+  <p class="kicker">Lesson 7 &middot; From your game vs R_Abarna &middot; 2026-06-29</p>
+  <h1>The f6 Fire Alarm</h1>
+  <p class="sub">You were checkmated in 23 moves, your king boxed in its own corner. The alarm went off long before the mate &mdash; a single enemy pawn told you the attack was coming.</p>
+
+  <h2>How it ended</h2>
+  <p>You castled your king to safety on the kingside. Twenty-three moves in, that &ldquo;safe&rdquo; king was checkmated by a single rook:</p>
+
+  <figure class="fig">
+    <div id="board-mate"></div>
+    <figcaption>
+      <strong>23.Rh8# &mdash; checkmate.</strong> Your king on <span class="cb-chip red">f8</span> has no
+      escape: <span class="cb-chip">e7</span> and <span class="cb-chip">g7</span> are both covered by the
+      White pawn on <span class="cb-chip blue">f6</span>, and the rook on <span class="cb-chip">h8</span>
+      sweeps the back rank. That f6 pawn did the quiet work; the rook just delivered.
+    </figcaption>
+  </figure>
+
+  <h2>The real culprit: the pawn on f6</h2>
+  <p>A pawn that reaches <span class="cb-chip blue">f6</span> (or <span class="cb-chip blue">f3</span>
+  against you) right next to a castled king is one of the most dangerous things in chess. From f6 it
+  attacks two squares: <span class="cb-chip">g7</span> and <span class="cb-chip">e7</span>. Those are
+  exactly the squares your king needs to breathe &mdash; and the squares it needs to recapture an
+  invading rook. With f6 in place, your <span class="cb-chip">g7</span> pawn becomes glued in front of
+  your king, unable to move, just waiting to be smashed.</p>
+
+  <h2>The break-in &mdash; an open g-file did the rest</h2>
+  <p>Earlier in the game you traded a bishop with <strong>13&hellip;Bxf3</strong>, and White recaptured
+  <strong>14.gxf3</strong>. That opened the <span class="cb-chip blue">g-file</span> &mdash; a clear lane
+  pointing straight at your king. White stacked a rook on it (<strong>20.Rhg1</strong>) and you walked
+  into the storm:</p>
+
+  <figure class="fig">
+    <div id="board-lift"></div>
+    <figcaption>
+      After 20.Rhg1. The <span class="cb-chip blue">g-file</span> is wide open, White's rook eyes
+      <span class="cb-chip">g7</span>, and the pawn on <span class="cb-chip blue">f6</span> means your
+      king can never recapture on g7. The red arrow is the blow that&rsquo;s coming.
+    </figcaption>
+  </figure>
+
+  <h2>Puzzle 1 — see the attack with the attacker&rsquo;s eyes</h2>
+  <p>Learn the pattern by playing it. You&rsquo;re <strong>White</strong> here. Black&rsquo;s king looks
+  tucked away behind its g7 pawn. The g-file is open and your pawn sits on f6. Find the breakthrough.</p>
+
+  <div id="puzzle1"></div>
+
+  <h2>Why the sacrifice works</h2>
+  <p>This is the exact sequence that ended your game. Walk through it slowly &mdash; notice that the king
+  can <em>never</em> take the rook, because the f6 pawn guards g7:</p>
+
+  <ul class="seq">
+    <li><span class="mv">21.Rxg7+</span> The rook gives itself up. Your king can&rsquo;t recapture &mdash; <span class="cb-chip blue">f6</span> covers <span class="cb-chip">g7</span>. The king must run.</li>
+    <li><span class="mv">21&hellip;Kf8</span> The only flight square.</li>
+    <li><span class="mv">22.Rh7</span> The rook slides over, threatening Rh8#.</li>
+    <li><span class="mv">22&hellip;Re6</span> Too slow &mdash; nothing defends the back rank.</li>
+    <li><span class="mv">23.Rh8#</span> Checkmate. f6 covers e7 and g7; the rook covers the rest.</li>
+  </ul>
+
+  <hr>
+
+  <div class="rule-card">
+    <div class="rule-title">The f6 Fire Alarm</div>
+    <div class="rule-body">
+      When an enemy pawn reaches <strong>f6</strong> next to your castled king (or <strong>f3</strong>
+      when you&rsquo;re White), treat it as an alarm bell. It freezes your g7 pawn and steals your
+      king&rsquo;s escape squares. Two responses:<br><br>
+      &bull; <strong>Don&rsquo;t let it land for free</strong> &mdash; challenge or capture the pawn before it digs in.<br>
+      &bull; <strong>Watch the open file</strong> next to your king. A rook arriving on it means a sacrifice on g7 is in the air.
+    </div>
+  </div>
+
+  <h2>Puzzle 2 — prevent it (rewind to move 13)</h2>
+  <p>Here&rsquo;s where the trouble really started. Your bishop on <span class="cb-chip">g4</span> attacks
+  the knight on <span class="cb-chip">f3</span>. Taking it feels natural &mdash; but think about
+  <em>how White must recapture</em>, and which file that opens, toward whose king. Choose the move that
+  keeps your king&rsquo;s shelter intact.</p>
+
+  <div id="puzzle2"></div>
+
+  <div class="good-box">
+    <strong>The principle:</strong> don&rsquo;t help your opponent open lines toward your own king. A
+    trade that forces <em>gxf3</em> hands White a free highway down the g-file &mdash; the very lane the
+    mating rook travelled. When you&rsquo;re castled, keep the files in front of your king closed.
+  </div>
+
+  <h2>What else came up in these games</h2>
+  <p>This was one of twelve rapid games (Jun 26&ndash;30). The other recurring leaks, for future sessions:</p>
+  <ul>
+    <li><strong>Converting won games (Lesson 6).</strong> R+N vs a bare king drawn on the clock &mdash; the King + Rook recipe fixes it.</li>
+    <li><strong>The stalemate trap (Lesson 5).</strong> Q+R+B vs a lone king drawn by stalemate &mdash; check before you grab the last piece.</li>
+  </ul>
+
+  <div class="ask">
+    <strong>Ask your teacher.</strong> Want a few quick reps of the g7 rook-sacrifice pattern &mdash;
+    both attacking <em>and</em> defending it &mdash; until you spot it instantly? Say the word. Or share
+    another game that didn&rsquo;t make sense and we&rsquo;ll dig in.
+  </div>
+
+  <footer>
+    Lesson 7 of <a href="../lessons/">all lessons</a> &middot;
+    <a href="0005-your-win-slipped-away.html">Lesson 5: Your Win Slipped Away</a> &middot;
+    <a href="0006-king-and-rook-mate.html">Lesson 6: King &amp; Rook Mate</a> &middot;
+    <a href="../reference/improvement-roadmap.html">Roadmap</a>
+  </footer>
+
+</body>
+<script src="../assets/chessboard.js"></script>
+<script>
+  // Final checkmate position: 23.Rh8#  (Black king f8, White rook h8, pawn f6 the key)
+  CB.render(document.getElementById('board-mate'), {
+    pieces: CB.fromFEN('3r1k1R/ppp2p2/4rP1p/3p4/8/2PP1P2/P6P/2KR4'),
+    highlights: { f8: 'red', h8: 'mark', f6: 'blue', e7: 'red', g7: 'red' }
+  });
+
+  // After 20.Rhg1: open g-file, rook eyeing g7, f6 pawn gluing the king in
+  CB.render(document.getElementById('board-lift'), {
+    pieces: CB.fromFEN('r3r1k1/ppp2pp1/5P1p/3p4/8/2PP1P2/P6P/2KR2R1'),
+    highlights: { g1: 'blue', g7: 'red', g8: 'mark', f6: 'blue' },
+    arrows: [ { from: 'g1', to: 'g7', color: 'red' } ]
+  });
+
+  // Puzzle 1: White to move (after 20...Rad8) -> 21.Rxg7+ is the breakthrough
+  CB.puzzle(document.getElementById('puzzle1'), {
+    num: 1,
+    prompt: 'White to move. The g-file is open and your pawn sits on f6. Black’s king hides behind its g7 pawn — break in.',
+    turn: 'w',
+    pieces: CB.fromFEN('3rr1k1/ppp2pp1/5P1p/3p4/8/2PP1P2/P6P/2KR2R1'),
+    highlights: { f6: 'blue', g7: 'red', g8: 'mark' },
+    bestFrom: 'g1',
+    best: ['g7'],
+    good: '✓ Rxg7+! The rook smashes the king’s last pawn cover. Black cannot recapture — the f6 pawn guards g7, so Kxg7 is illegal. After Kf8, the rook swings Rh7 and then Rh8# is unstoppable. This is the exact mate you walked into.',
+    bad: 'Black’s king only has one pawn (g7) shielding it, and the g-file is open. Is g7 really defended? Remember the f6 pawn stops the king from ever recapturing there.',
+    reveal: 'Rxg7+ — a rook sacrifice that isn’t really a sacrifice, because the f6 pawn means the king can never take back. After 21…Kf8 22.Rh7 (threatening Rh8#) the attack crashes through. f6 + open g-file = sacrifice on g7.'
+  });
+
+  // Puzzle 2: rewind to move 13 (Black to move). Avoid 13...Bxf3 which opens the g-file.
+  CB.puzzle(document.getElementById('puzzle2'), {
+    num: 2,
+    prompt: 'Black to move (move 13). Your bishop on g4 hits the f3 knight. Taking it forces gxf3 — opening a file at YOUR king. Pick the safe move instead.',
+    turn: 'b',
+    pieces: CB.fromFEN('r4rk1/ppp2ppp/2n5/2bpP3/5Pb1/3B1N2/PPPB2PP/2KR3R'),
+    highlights: { g8: 'mark', g4: 'green', f3: 'red' },
+    bestFrom: 'g4',
+    best: ['h5', 'e6'],
+    trap: { from: 'g4', to: 'f3' },
+    good: '✓ Retreating the bishop (Bh5 or Be6) keeps the g-file closed and your king’s shelter intact. The knight on f3 isn’t going anywhere — there’s no rush to trade it.',
+    trapMsg: '✗ Bxf3 forces 14.gxf3, and now White owns an open g-file aimed straight at your king on g8. That file became the highway for the rook that checkmated you eight moves later. Don’t open lines toward your own king.',
+    bad: 'Think about your king on g8. Which move keeps the g-file — and your king’s pawn shelter — closed?',
+    reveal: 'Bh5 (or Be6). Keep the bishop and avoid the trade that lets White play gxf3, ripping open the g-file at your king. That open file is precisely what White used to mate you. When castled, keep the files in front of your king shut.'
+  });
+</script>
+</html>

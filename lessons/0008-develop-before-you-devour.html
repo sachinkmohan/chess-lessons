@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 8 — Develop Before You Devour</title>
+<link rel="stylesheet" href="../assets/chessboard.css">
+<style>
+  :root { --ink:#1a1a1a; --soft:#6b6b6b; --rule:#d9d2c5; --bg:#fdfcf8; --accent:#7a1f1f; --good:#2f7d32; --bad:#b23b3b; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: var(--ink);
+    background: var(--bg); line-height: 1.55; max-width: 42rem; margin: 3rem auto; padding: 0 1.25rem; }
+  .kicker { color: var(--soft); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; margin: 0; }
+  h1 { font-size: 1.7rem; margin: .1rem 0 .3rem; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); font-style: italic; margin: 0 0 1.6rem; }
+  h2 { font-size: 1.2rem; margin: 2rem 0 .4rem; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  p { margin: .6rem 0; }
+  a { color: var(--accent); }
+  .warn { border-left: 3px solid var(--bad); background: #fbeeee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .good-box { border-left: 3px solid var(--good); background: #eef6ee; padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .rule-card { border: 2px solid var(--accent); background: #fffdf7; border-radius: 8px; padding: 1rem 1.4rem; margin: 1.6rem 0; }
+  .rule-card .rule-title { color: var(--accent); font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: .5rem; font-family: Georgia, serif; }
+  .rule-card .rule-body { font-size: 1.05rem; line-height: 1.65; }
+  .ledger { list-style: none; padding: 0; margin: 1.1rem 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .ledger li { display: flex; align-items: baseline; gap: .6rem; padding: .55rem .9rem; border-bottom: 1px solid var(--rule); font-size: .96rem; }
+  .ledger li:last-child { border-bottom: 0; }
+  .ledger li.win { background: #eef6ee; }
+  .ledger li.loss { background: #fbeeee; }
+  .ledger .who { font-weight: bold; min-width: 6.5rem; }
+  .ledger .grab { color: var(--soft); flex: 1; }
+  .ledger .res { font-weight: bold; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+  .ledger .win .res { color: var(--good); }
+  .ledger .loss .res { color: var(--bad); }
+  .checklist { list-style: none; padding: 0; margin: 1rem 0; }
+  .checklist li { padding: .4rem 0 .4rem 2rem; position: relative; }
+  .checklist li::before { content: "\2713"; position: absolute; left: 0; color: var(--good); font-weight: bold; font-size: 1.1rem; }
+  .scanbox { border: 1px solid var(--rule); background: #fffdf7; border-radius: 8px; padding: .9rem 1.2rem; margin: 1.2rem 0; }
+  .scanbox strong { color: var(--accent); }
+  figure.fig { margin: 1.4rem 0; }
+  figure.fig figcaption { font-size: .86rem; color: var(--soft); margin-top: .5rem; max-width: 26rem; line-height: 1.4; }
+  .ask { background: #fbf3ec; border-left: 3px solid var(--accent); padding: .7rem 1rem; border-radius: 0 6px 6px 0; margin-top: 2rem; }
+  footer { color: var(--soft); font-size: .9rem; margin-top: 2.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+</style>
+</head>
+<body>
+
+  <p class="kicker">Lesson 8 &middot; From your last 13 rapid games &middot; Jun 26&ndash;30</p>
+  <h1>Develop Before You Devour</h1>
+  <p class="sub">You asked: what one change gets me to 700? This is it. One habit appears in five of your last thirteen games and decides almost all of them.</p>
+
+  <h2>The pattern that&rsquo;s capping you</h2>
+  <p>In game after game, your queen leaves home early to eat pawns &mdash; usually on the wing
+  (<span class="cb-chip red">b2</span>/<span class="cb-chip red">b7</span>,
+  <span class="cb-chip red">a2</span>/<span class="cb-chip red">a6</span>,
+  <span class="cb-chip red">c2</span>) &mdash; while the rest of your army stays asleep. Here&rsquo;s the ledger:</p>
+
+  <ul class="ledger">
+    <li class="win"><span class="who">vs ErrroB</span><span class="grab">Qxb2, Qxc2, Qxc3, Qxd4</span><span class="res">Win</span></li>
+    <li class="win"><span class="who">vs paple123</span><span class="grab">Qxb2, Qxb5, Qxe5, Qxg5</span><span class="res">Win</span></li>
+    <li class="loss"><span class="who">vs martinon2</span><span class="grab">Bxc2, Qxa2, Qxb2 &mdash; king stuck on f8</span><span class="res">Loss</span></li>
+    <li class="loss"><span class="who">vs richardpizani</span><span class="grab">Qxb7, Qxc6, Qxd5 &mdash; won 3 pawns!</span><span class="res">Loss</span></li>
+    <li class="loss"><span class="who">vs bertilft</span><span class="grab">Qxb7, Qxa6 &mdash; gave up the b-file</span><span class="res">Loss</span></li>
+  </ul>
+
+  <div class="warn">
+    <strong>Read that again.</strong> The two times it &ldquo;worked,&rdquo; your opponent was just as
+    loose as you &mdash; you both blundered, you blundered last. The three times you faced someone a
+    little steadier, the <em>exact same habit</em> cost you the game. <strong>That is the 600-to-700
+    wall.</strong> At 600 everyone grabs and hangs pieces. At 700 they make you pay for the detour.
+  </div>
+
+  <h2>Why grabbing pawns loses</h2>
+  <p>A pawn is worth one point &mdash; but a wing pawn in the opening is <em>bait</em>. When your queen
+  sails off to take it:</p>
+  <ul>
+    <li>Your opponent develops a piece <strong>with tempo</strong>, attacking your queen as they go. You scramble; they build.</li>
+    <li>Your <strong>other pieces sit at home</strong>. You&rsquo;re effectively playing with one piece while they play with all of them.</li>
+    <li>Your <strong>king is often still in the centre</strong>, because castling kept getting postponed for one more bite.</li>
+  </ul>
+
+  <figure class="fig">
+    <div id="board-rp"></div>
+    <figcaption>
+      Your game vs richardpizani, the finish. You&rsquo;d eaten <strong>three pawns</strong> with your
+      queen by move 14 &mdash; yet here your king is stranded on <span class="cb-chip red">e2</span>,
+      Black&rsquo;s rooks have crashed in on <span class="cb-chip">c3</span> and
+      <span class="cb-chip">d8</span>, and you resigned. The extra pawns never mattered.
+    </figcaption>
+  </figure>
+
+  <p>We named this leak the <a href="0004-the-greedy-queen.html">Greedy Queen</a> back in Lesson 4. We&rsquo;re
+  back because it&rsquo;s still your <strong>single most frequent mistake</strong>. This time, one rule to
+  end it &mdash; and two drills from your own games.</p>
+
+  <hr>
+
+  <div class="rule-card">
+    <div class="rule-title">The One Change</div>
+    <div class="rule-body">
+      <strong>Develop everyone and castle before your queen takes a pawn.</strong><br><br>
+      In the first dozen moves, run a tiny checklist before any capture with the queen:
+    </div>
+    <ul class="checklist">
+      <li>Are both my <strong>knights and bishops</strong> developed?</li>
+      <li>Is my <strong>king castled</strong>?</li>
+      <li>If I take this, can my queen <strong>get chased</strong> by a developing move?</li>
+    </ul>
+    <div class="rule-body">
+      If the answer to either of the first two is &ldquo;no,&rdquo; <strong>leave the pawn</strong> and
+      make a developing move instead. The pawn will still be there later &mdash; or it was poison anyway.
+    </div>
+  </div>
+
+  <h2>Puzzle 1 — develop, or grab? (you as Black)</h2>
+  <p>Your real game vs martinon2, move 7. The white <span class="cb-chip red">c2</span> pawn is hanging
+  &mdash; your bishop on <span class="cb-chip">f5</span> can snap it off. But your king is still in the
+  centre and your kingside isn&rsquo;t developed. What&rsquo;s the move?</p>
+
+  <div id="puzzle1"></div>
+
+  <h2>Puzzle 2 — improve, or raid? (you as White)</h2>
+  <p>Your real game vs bertilft, move 16. You&rsquo;re developed, castled, slightly better. Your queen
+  on <span class="cb-chip">e2</span> eyes the <span class="cb-chip red">b7</span> pawn (via b5). Or you
+  could plant your sleepy knight on a monster square. Choose.</p>
+
+  <div id="puzzle2"></div>
+
+  <div class="good-box">
+    <strong>The habit to build:</strong> in the opening, ask &ldquo;what&rsquo;s my <em>worst-placed
+    piece</em>, and how do I improve it?&rdquo; &mdash; not &ldquo;what can I take?&rdquo; Nine times out
+    of ten the developing move is better than the pawn, and you&rsquo;ll stop handing steadier opponents
+    the game.
+  </div>
+
+  <h2>How this gets you to 700</h2>
+  <p>You don&rsquo;t need new openings or fancy tactics. You need to stop giving away the games you should
+  draw or win. Castle early, keep your queen home until your pieces are out, and let your opponents be the
+  ones who overreach. Boring, developed, castled chess beats greedy chess at this level &mdash; every time.</p>
+
+  <div class="scanbox">
+    <strong>Your one focus for the next 10 games.</strong> Before move 12, do not capture <em>anything</em>
+    with your queen unless both knights and bishops are out and you&rsquo;ve castled. Just that. Then send
+    me the games and we&rsquo;ll see the rating move.
+  </div>
+
+  <div class="ask">
+    <strong>Ask your teacher.</strong> Want me to turn this into a quick daily drill &mdash; I show you an
+    opening position, you choose &ldquo;develop&rdquo; or &ldquo;grab&rdquo; against the clock? Or bring
+    your next batch of games and we&rsquo;ll count how often the queen stayed home.
+  </div>
+
+  <footer>
+    Lesson 8 of <a href="../lessons/">all lessons</a> &middot;
+    <a href="0004-the-greedy-queen.html">Lesson 4: The Greedy Queen</a> &middot;
+    <a href="0007-the-f6-fire-alarm.html">Lesson 7: The f6 Fire Alarm</a> &middot;
+    <a href="../reference/improvement-roadmap.html">Roadmap</a>
+  </footer>
+
+</body>
+<script src="../assets/chessboard.js"></script>
+<script>
+  // richardpizani final position: White up material, king stranded on e2, resigned
+  CB.render(document.getElementById('board-rp'), {
+    pieces: CB.fromFEN('3r2k1/5ppp/1p6/b3P3/4P3/2r3B1/4KPPP/1R6'),
+    highlights: { e2: 'red', c3: 'mark', d8: 'mark', a5: 'mark' }
+  });
+
+  // Puzzle 1: martinon2 move 7, Black to move. Develop the f8 bishop (Be7/Bd6) toward castling
+  // instead of 7...Bxc2 (grabbing the pawn, bishop gets chased, king stays stuck).
+  CB.puzzle(document.getElementById('puzzle1'), {
+    num: 1,
+    prompt: 'Black to move. The c2 pawn is free for your f5 bishop. But your king is in the centre — what matters more right now?',
+    turn: 'b',
+    pieces: CB.fromFEN('r3kbnr/pp3ppp/2p1p3/q4b2/3P4/2N2N2/PPPBQPPP/R3KB1R'),
+    highlights: { e8: 'mark', c2: 'red', f8: 'green' },
+    bestFrom: 'f8',
+    best: ['e7', 'd6'],
+    trap: { from: 'f5', to: 'c2' },
+    good: '✓ Develop the bishop (Be7 or Bd6) and you can castle next move — king safe, pieces coming out. This is how you reach a position where grabbing is actually safe later.',
+    trapMsg: '✗ Bxc2 — exactly what you played. It wins a pawn, but White hits the bishop with Rc1, then Nh4 chases it again, and your good bishop gets traded off while your king is still stuck in the centre. You fell behind and lost. The pawn wasn\'t worth it.',
+    bad: 'Your king is still on e8. The most valuable thing you can do in the opening is get developed and castle — not win a pawn on the far side of the board.',
+    reveal: 'Be7 (or Bd6), heading to castle. Your king\'s safety and getting your pieces out are worth far more than the c2 pawn. Taking it (Bxc2) just invites Rc1 and Nh4, chasing your bishop while your king stays exposed.'
+  });
+
+  // Puzzle 2: bertilft move 16, White to move. Plant the knight with Ne5 (monster outpost)
+  // instead of 16.Qb5 (heading to grab b7, after which Black gets the b-file and counterplay).
+  CB.puzzle(document.getElementById('puzzle2'), {
+    num: 2,
+    prompt: 'White to move. You can send your queen toward the b7 pawn (Qb5), or improve your worst piece. Pick the stronger plan.',
+    turn: 'w',
+    pieces: CB.fromFEN('r5k1/ppp2pp1/2nq1n1p/3p4/3P4/5N1P/PPPNQPP1/5RK1'),
+    highlights: { b7: 'red', f3: 'green', e5: 'green' },
+    bestFrom: 'f3',
+    best: ['e5'],
+    trap: { from: 'e2', to: 'b5' },
+    good: '✓ Ne5! Your knight lands on a dominant central square, hitting c6 and eyeing f7. If Black takes (Nxe5), dxe5 forks the queen on d6 and the knight on f6. This is improving a piece instead of chasing a pawn.',
+    trapMsg: '✗ Qb5 heads for b7 — and after you grab it, Black plays …Rb8 hitting your queen, then …Rxb2, seizing the open b-file and all the counterplay. That\'s the game you actually lost: you won a pawn and handed over the initiative.',
+    bad: 'Don\'t look for what you can take — look for your worst piece. Which knight is doing nothing, and where could it land to dominate the centre?',
+    reveal: 'Ne5 — the knight on f3 jumps to a powerful central outpost (and …Nxe5 dxe5 even forks the queen and knight). Improving your worst-placed piece beats sending the queen on a pawn-raid that gives Black the b-file.'
+  });
+</script>
+</html>
